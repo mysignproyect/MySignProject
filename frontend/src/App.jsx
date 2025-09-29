@@ -1,10 +1,10 @@
-import Nav from "./components/Nav";
+import { Routes, Route } from "react-router-dom";
+import Inicio from "./pages/InicioPage";
 
 export default function App() {
   return (
-    <div>
-      <Nav />
-      {}
-    </div>
+    <Routes>
+      <Route path="/" element={<Inicio />} />
+    </Routes>
   );
 }
