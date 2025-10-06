@@ -5,7 +5,6 @@ Este archivo inicializa la aplicación FastAPI, configura el middleware CORS
 y define la ruta raíz del proyecto. Todas las rutas adicionales se añadirán
 en app/routes/.
 """
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
