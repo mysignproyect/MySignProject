@@ -1,5 +1,10 @@
-# Paquete destinado a definir los modelos Pydantic de la API.
-# Los modelos describen la estructura de datos que utiliza la aplicación.
+"""
+Paquete de modelos Pydantic del proyecto My Sign.
+
+Este módulo agrupa las definiciones de los esquemas de datos (schemas)
+usados para validar la información que viaja entre la API y los clientes.
+"""
+
 from .schemas import Servicio, Interprete
 
 __all__ = ["Servicio", "Interprete"]
