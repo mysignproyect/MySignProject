@@ -1,29 +1,25 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual environments
-.env
-.venv
-env/
+# Entornos virtuales
 venv/
-ENV/
+env/
 
-# VSCode / IDE
-.vscode/
-.idea/
-
-# Byte-compiled / logs
-*.log
-*.pot
+# Archivos de caché
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.log
 
-# Tests / coverage
+# Archivos de entorno y configuración local
+*.env
+.env
+.idea/
+.vscode/
+
+# Cobertura de pruebas
 htmlcov/
-.tox/
 .coverage
-.pytest_cache/
+.tox/
 
-# Others
+# Archivos de sistema
 .DS_Store
+Thumbs.db
