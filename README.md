@@ -283,8 +283,6 @@ Para consultas, sugerencias o comentarios, contactar al equipo de desarrollo.
 
 ## Recursos Adicionales
 
-- [Documentación Backend](backend/README.md)
-- [Documentación Frontend](frontend/README.md)
 - [API Docs (Swagger)](http://localhost:8000/docs)
 - [Propuesta Original](docs/Propuesta_proyecto_de_aula_My_Sign.docx)
 
