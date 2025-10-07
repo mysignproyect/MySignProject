@@ -1,46 +1,9 @@
-"""
-app/services/buscador.py
-------------------------
-Sistema de búsqueda para My Sign usando HashMaps (diccionarios de Python).
-
-Por qué usamos HashMaps (diccionarios):
-- Un HashMap ofrece, en promedio, acceso O(1) para operaciones de búsqueda por clave.
-- Aquí mapeamos identificadores y categorías a listas/objetos para realizar búsquedas
-  muy rápidas sin recorrer linealmente toda la colección.
-- Tradeoff: mayor uso de memoria (duplicación de referencias), a cambio de búsquedas mucho más rápidas.
-
-Estructuras utilizadas:
-- servicios_por_id: Dict[str, dict]                 # ID -> servicio (búsqueda directa)
-- servicios_por_categoria: Dict[str, List[dict]]   # categoría -> lista de servicios
-- servicios_por_zona: Dict[str, List[dict]]        # zona -> lista de servicios
-- interpretes_por_id: Dict[str, dict]              # ID -> intérprete
-- interpretes_por_especialidad: Dict[str, List[dict]]  # especialidad -> lista intérpretes
-
-Nota: Los diccionarios de Python se comportan como HashMaps con tiempo promedio O(1)
-para operaciones get/put. Las complejidades indicadas abajo asumen comportamiento promedio.
-"""
-
 from typing import Dict, List, Optional
 
 from data.mock_data import SERVICIOS_MOCK, INTERPRETES_MOCK
 
 
 class BuscadorServicios:
-    """
-    Clase que implementa un sistema de búsqueda basado en HashMaps para servicios e intérpretes.
-
-    Ventajas:
-    - Consultas por id/categoría/zona/especialidad realizan accesos directos
-      a estructuras preconstruidas, evitando búsquedas lineales costosas.
-    - Ideal para APIs que necesitan respuestas rápidas y frecuentes.
-
-    Uso:
-        buscador = BuscadorServicios(SERVICIOS_MOCK, INTERPRETES_MOCK)
-        servicio = buscador.buscar_servicio_por_id("s1")
-        hospitales = buscador.buscar_servicios_por_categoria("Salud")
-        norte = buscador.buscar_servicios_por_zona("Norte")
-        filtrados = buscador.filtrar_servicios(categoria="Salud", tiene_interprete=True)
-    """
 
     def __init__(self, servicios: List[dict], interpretes: List[dict]):
         """
@@ -84,9 +47,6 @@ class BuscadorServicios:
         # HashMap: especialidad -> [interprete, interprete, ...]
         self.interpretes_por_especialidad: Dict[str, List[dict]] = {}
 
-        # ----------------------------
-        # Construcción de servicios
-        # ----------------------------
         # Recorremos todos los servicios una sola vez para poblar los tres mapas relacionados.
         for servicio in servicios:
             sid = servicio.get("id")
@@ -110,9 +70,6 @@ class BuscadorServicios:
                 self.servicios_por_zona[zona] = []
             self.servicios_por_zona[zona].append(servicio)
 
-        # ----------------------------
-        # Construcción de intérpretes
-        # ----------------------------
         # Recorremos todos los intérpretes para mapear por id y por cada especialidad.
         for interprete in interpretes:
             iid = interprete.get("id")
@@ -129,22 +86,8 @@ class BuscadorServicios:
                     self.interpretes_por_especialidad[esp] = []
                 self.interpretes_por_especialidad[esp].append(interprete)
 
-    # ----------------------------
-    # MÉTODOS DE BÚSQUEDA
-    # ----------------------------
     def buscar_servicio_por_id(self, id: str) -> Optional[dict]:
         """
-        Busca un servicio por su identificador único.
-
-        Parámetros:
-            id (str): Identificador del servicio.
-
-        Retorna:
-            dict | None: El diccionario del servicio si existe, o None si no se encuentra.
-
-        Ejemplo:
-            buscador.buscar_servicio_por_id("s1")
-
         Complejidad temporal:
             O(1) promedio (lookup directo en HashMap).
         """
@@ -152,17 +95,6 @@ class BuscadorServicios:
 
     def buscar_servicios_por_categoria(self, categoria: str) -> List[dict]:
         """
-        Devuelve la lista de servicios pertenecientes a una categoría dada.
-
-        Parámetros:
-            categoria (str): Nombre de la categoría (ej. "Salud").
-
-        Retorna:
-            List[dict]: Lista de servicios (vacía si no hay coincidencias).
-
-        Ejemplo:
-            buscador.buscar_servicios_por_categoria("Educación")
-
         Complejidad temporal:
             O(1) para obtener la lista (pero iterar sobre la lista completa es O(k),
             donde k es el número de servicios en esa categoría).
@@ -171,17 +103,6 @@ class BuscadorServicios:
 
     def buscar_servicios_por_zona(self, zona: str) -> List[dict]:
         """
-        Devuelve la lista de servicios pertenecientes a una zona geográfica.
-
-        Parámetros:
-            zona (str): Nombre de la zona (ej. "Centro", "Norte").
-
-        Retorna:
-            List[dict]: Lista de servicios en la zona (vacía si no hay coincidencias).
-
-        Ejemplo:
-            buscador.buscar_servicios_por_zona("Norte")
-
         Complejidad temporal:
             O(1) para obtener la lista; iterar sobre la lista es O(k).
         """
@@ -194,25 +115,6 @@ class BuscadorServicios:
         tiene_interprete: Optional[bool] = None,
     ) -> List[dict]:
         """
-        Filtra servicios combinando criterios opcionales: categoría, zona y disponibilidad de intérprete.
-
-        Estrategia implementada (para evitar búsqueda lineal completa cuando sea posible):
-        - Si se proporciona 'categoria', se comienza con la lista de esa categoría (k elementos).
-        - Si no, pero se proporciona 'zona', se comienza con la lista de esa zona.
-        - Si no se proporciona ninguno, se recurre a todos los servicios (n elementos).
-        - A partir de la lista inicial se aplican los filtros restantes (si existen).
-
-        Parámetros:
-            categoria (str | None): Filtrar por categoría.
-            zona (str | None): Filtrar por zona.
-            tiene_interprete (bool | None): Filtrar por disponibilidad de intérprete LSC.
-
-        Retorna:
-            List[dict]: Lista de servicios que cumplen los criterios.
-
-        Ejemplo:
-            buscador.filtrar_servicios(categoria="Salud", tiene_interprete=True)
-
         Complejidad temporal:
             - Mejor caso: si categoria o zona reduce mucho la búsqueda, O(k) donde k << n.
             - Peor caso: si no hay filtros iniciales, O(n) donde n = total de servicios.
@@ -250,17 +152,6 @@ class BuscadorServicios:
 
     def buscar_interprete_por_id(self, id: str) -> Optional[dict]:
         """
-        Busca un intérprete por su identificador único.
-
-        Parámetros:
-            id (str): Identificador del intérprete.
-
-        Retorna:
-            dict | None: Diccionario del intérprete o None si no existe.
-
-        Ejemplo:
-            buscador.buscar_interprete_por_id("i1")
-
         Complejidad temporal:
             O(1) promedio (lookup directo en HashMap).
         """
@@ -268,17 +159,6 @@ class BuscadorServicios:
 
     def buscar_interpretes_por_especialidad(self, especialidad: str) -> List[dict]:
         """
-        Devuelve la lista de intérpretes que tienen la especialidad indicada.
-
-        Parámetros:
-            especialidad (str): Nombre de la especialidad (ej. "Médica").
-
-        Retorna:
-            List[dict]: Lista de intérpretes (vacía si no hay coincidencias).
-
-        Ejemplo:
-            buscador.buscar_interpretes_por_especialidad("Legal")
-
         Complejidad temporal:
             O(1) para obtener la lista; iterar sobre la lista es O(k).
         """
@@ -286,39 +166,19 @@ class BuscadorServicios:
 
     def obtener_todas_categorias(self) -> List[str]:
         """
-        Retorna una lista con todas las categorías indexadas en el buscador.
-
-        Retorna:
-            List[str]: Lista de nombres de categorías.
-
-        Ejemplo:
-            buscador.obtener_todas_categorias()
-
         Complejidad temporal:
             O(c) donde c es el número de categorías (gasto en construcción de la lista).
         """
         return list(self.servicios_por_categoria.keys())
 
 
-# ----------------------------
-# Inicializador por conveniencia (usa datos mock)
-# ----------------------------
 def crear_buscador_desde_mock() -> BuscadorServicios:
     """
-    Crea una instancia de BuscadorServicios inicializada con los datos mock del proyecto.
-
-    Uso:
-        buscador = crear_buscador_desde_mock()
-
     Complejidad:
         O(n + m * k) similar a la construcción directa en __init__.
     """
     return BuscadorServicios(SERVICIOS_MOCK, INTERPRETES_MOCK)
 
-
-# ----------------------------
-# Bloque de prueba rápido (solo para desarrollo)
-# ----------------------------
 if __name__ == "__main__":
     buscador = crear_buscador_desde_mock()
     print("Total servicios indexados:", len(buscador.servicios_por_id))
