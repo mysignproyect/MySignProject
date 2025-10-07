@@ -1,22 +1,8 @@
-"""
-Módulo: schemas.py
-------------------
-Contiene los modelos de datos utilizados por la API My Sign,
-definidos mediante Pydantic. Estos modelos permiten validar,
-estructurar y documentar la información intercambiada entre
-el backend y los clientes (frontend, servicios externos, etc.).
-"""
-
 from pydantic import BaseModel, Field
 from typing import List, Literal, Optional
 
 
 class Servicio(BaseModel):
-    """
-    Modelo de datos que representa un servicio accesible en el sistema My Sign.
-    Incluye información sobre ubicación, categoría, accesibilidad y disponibilidad
-    de intérprete en Lengua de Señas Colombiana (LSC).
-    """
 
     # Identificador único del servicio (puede ser UUID o un string simple)
     id: str = Field(..., description="Identificador único del servicio")
@@ -63,10 +49,6 @@ class Servicio(BaseModel):
     )
 
     class Config:
-        """
-        Configuración interna del modelo:
-        - json_schema_extra: proporciona un ejemplo para la documentación Swagger.
-        """
         json_schema_extra = {
             "example": {
                 "id": "srv-001",
@@ -86,10 +68,6 @@ class Servicio(BaseModel):
 
 
 class Interprete(BaseModel):
-    """
-    Modelo de datos que representa un intérprete de Lengua de Señas Colombiana (LSC).
-    Almacena información de contacto, especialidades, experiencia y disponibilidad.
-    """
 
     # Identificador único del intérprete (UUID o string)
     id: str = Field(..., description="Identificador único del intérprete")
@@ -132,11 +110,6 @@ class Interprete(BaseModel):
     email: str = Field(..., description="Correo electrónico del intérprete")
 
     class Config:
-        """
-        Configuración interna del modelo:
-        - populate_by_name: permite usar 'anios_experiencia' como alias JSON.
-        - json_schema_extra: ejemplo para la documentación Swagger.
-        """
         populate_by_name = True
         json_schema_extra = {
             "example": {

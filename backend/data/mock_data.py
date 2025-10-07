@@ -1,22 +1,3 @@
-"""
-mock_data.py
--------------
-Este módulo contiene datos de prueba (mock) para el proyecto My Sign.
-Estos datos permiten realizar pruebas locales del backend sin necesidad
-de una base de datos real durante el desarrollo del MVP.
-
-Incluye listas de servicios accesibles e intérpretes de Lengua de Señas Colombiana (LSC)
-ubicados en Medellín, con información realista y coherente con los modelos Pydantic.
-"""
-
-# ============================================
-# LISTA DE SERVICIOS DE PRUEBA (SERVICIOS_MOCK)
-# ============================================
-
-# Cada servicio representa una entidad de tipo "Salud", "Educación", "Gobierno" u otra categoría,
-# incluyendo datos realistas de Medellín (dirección, contacto, zona, etc.)
-# Estructura basada en el modelo Servicio definido en app/models/schemas.py
-
 SERVICIOS_MOCK = [
     # --- Servicios de Salud ---
     {
@@ -167,13 +148,6 @@ SERVICIOS_MOCK = [
     }
 ]
 
-# ==============================================
-# LISTA DE INTÉRPRETES DE PRUEBA (INTERPRETES_MOCK)
-# ==============================================
-
-# Cada intérprete representa un profesional LSC disponible en Medellín
-# con diferentes especialidades, experiencia y cobertura.
-
 INTERPRETES_MOCK = [
     {
         "id": "i1",
@@ -232,9 +206,3 @@ INTERPRETES_MOCK = [
         "email": "andres.gomez@example.com"
     }
 ]
-
-# ==============================================
-# NOTA FINAL
-# ==============================================
-# Estos datos son exclusivamente para desarrollo, pruebas y demostraciones del MVP de My Sign.
-# No representan información real ni confidencial.

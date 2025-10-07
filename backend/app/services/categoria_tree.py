@@ -1,26 +1,7 @@
-"""
-categoria_tree.py
------------------
-Este módulo define una estructura de árbol para organizar los servicios del proyecto My Sign
-por categorías y subcategorías. Se utiliza un árbol jerárquico donde cada nodo puede contener
-otras subcategorías (hijos) y una lista de servicios asociados.
-
-El árbol permite:
-- Cargar y clasificar los servicios automáticamente según su categoría y subcategoría.
-- Buscar servicios dentro de una categoría o subcategoría específica (recursivamente).
-- Listar todas las categorías y subcategorías disponibles.
-
-Esta estructura es clave para futuras funcionalidades como búsquedas optimizadas,
-navegación jerárquica y filtrado inteligente en la API o frontend.
-"""
-
 from typing import Dict, List, Optional
 from data.mock_data import SERVICIOS_MOCK
 
 
-# ===============================================================
-# CLASE NODOCATEGORIA
-# ===============================================================
 class NodoCategoria:
     """
     Representa un nodo dentro del árbol de categorías.
@@ -39,22 +20,11 @@ class NodoCategoria:
     """
 
     def __init__(self, nombre: str):
-        """
-        Inicializa un nuevo nodo de categoría.
-        :param nombre: Nombre de la categoría o subcategoría
-        """
         self.nombre: str = nombre
         self.subcategorias: Dict[str, NodoCategoria] = {}
         self.servicios: List[dict] = []
 
     def add_subcategoria(self, nombre: str) -> "NodoCategoria":
-        """
-        Agrega una subcategoría al nodo actual. Si ya existe, la retorna.
-        Complejidad temporal: O(1), ya que se accede por clave en un diccionario.
-
-        :param nombre: Nombre de la subcategoría
-        :return: NodoCategoria correspondiente a la subcategoría
-        """
         if nombre not in self.subcategorias:
             self.subcategorias[nombre] = NodoCategoria(nombre)
         return self.subcategorias[nombre]
@@ -63,15 +33,9 @@ class NodoCategoria:
         """
         Agrega un servicio a la lista del nodo actual.
         Complejidad temporal: O(1)
-
-        :param servicio: Diccionario con la información del servicio
         """
         self.servicios.append(servicio)
 
-
-# ===============================================================
-# CLASE ARBOLCATEGORIAS
-# ===============================================================
 class ArbolCategorias:
     """
     Representa el árbol general de categorías de servicios.
@@ -118,14 +82,7 @@ class ArbolCategorias:
         self, categoria: str, subcategoria: Optional[str] = None
     ) -> List[dict]:
         """
-        Busca todos los servicios asociados a una categoría y, opcionalmente, a una subcategoría.
-        Este método usa recursión para recorrer el árbol.
-
         COMPLEJIDAD TEMPORAL: O(n), donde n es el número total de nodos en el árbol.
-
-        :param categoria: Nombre de la categoría principal (ej. "Salud")
-        :param subcategoria: Subcategoría opcional (ej. "Hospitales")
-        :return: Lista de servicios encontrados
         """
 
         resultados: List[dict] = []
@@ -155,12 +112,7 @@ class ArbolCategorias:
     # ---------------------------------------------------------------
     def obtener_todas_categorias(self) -> List[str]:
         """
-        Retorna una lista con los nombres de todas las categorías y subcategorías del árbol.
-        Se implementa de forma RECURSIVA para recorrer toda la jerarquía.
-
         COMPLEJIDAD TEMPORAL: O(n), donde n es el número total de nodos.
-
-        :return: Lista con todos los nombres de categorías y subcategorías
         """
         categorias: List[str] = []
 
@@ -178,12 +130,8 @@ class ArbolCategorias:
     # ---------------------------------------------------------------
     def cargar_servicios(self, servicios: List[dict]):
         """
-        Distribuye los servicios dentro del árbol según su categoría y subcategoría.
-
         COMPLEJIDAD TEMPORAL: O(n), siendo n el número de servicios.
         Cada inserción en un nodo es O(1).
-
-        :param servicios: Lista de servicios en formato diccionario
         """
         for servicio in servicios:
             categoria = servicio.get("categoria")
@@ -205,9 +153,6 @@ class ArbolCategorias:
                 nuevo_nodo.add_servicio(servicio)
 
 
-# ===============================================================
-# FUNCIÓN AUXILIAR PARA INICIALIZAR EL ÁRBOL CON SERVICIOS MOCK
-# ===============================================================
 def inicializar_arbol_con_mock() -> ArbolCategorias:
     """
     Crea una instancia de ArbolCategorias y carga los servicios de prueba (mock).
@@ -219,10 +164,6 @@ def inicializar_arbol_con_mock() -> ArbolCategorias:
     arbol.cargar_servicios(SERVICIOS_MOCK)
     return arbol
 
-
-# ===============================================================
-# EJEMPLO DE USO (solo para pruebas locales)
-# ===============================================================
 if __name__ == "__main__":
     arbol = inicializar_arbol_con_mock()
     print("Categorías disponibles:")
