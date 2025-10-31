@@ -7,7 +7,7 @@ class Servicio(BaseModel):
     # Identificador único del servicio (puede ser UUID o un string simple)
     id: str = Field(..., description="Identificador único del servicio")
 
-    # Nombre del servicio, por ejemplo: “Hospital San José”
+    # Nombre del servicio, por ejemplo: "Hospital San José"
     nombre: str = Field(..., description="Nombre del servicio o institución")
 
     # Categoría general del servicio (solo acepta valores predefinidos)
@@ -15,7 +15,7 @@ class Servicio(BaseModel):
         ..., description="Categoría principal del servicio"
     )
 
-    # Subcategoría más específica, por ejemplo: “Clínica privada” o “Universidad pública”
+    # Subcategoría más específica, por ejemplo: "Clínica privada" o "Universidad pública"
     subcategoria: str = Field(..., description="Tipo o clasificación más específica del servicio")
 
     # Dirección física donde se encuentra el servicio
@@ -68,6 +68,13 @@ class Servicio(BaseModel):
 
 
 class Interprete(BaseModel):
+    """
+    Modelo de datos para Intérprete de Lengua de Señas Colombiana (LSC).
+    
+    CAMBIO IMPORTANTE (Checkpoint #2):
+    - Se eliminó el campo 'tarifa_hora' para simplificar el MVP.
+    - El enfoque es conectar usuarios con intérpretes, sin gestión de tarifas en esta versión.
+    """
 
     # Identificador único del intérprete (UUID o string)
     id: str = Field(..., description="Identificador único del intérprete")
@@ -90,9 +97,6 @@ class Interprete(BaseModel):
 
     # Horario o disponibilidad de atención
     disponibilidad: str = Field(..., description="Horario general de disponibilidad del intérprete")
-
-    # Tarifa por hora en pesos colombianos
-    tarifa_hora: float = Field(..., description="Tarifa por hora en COP")
 
     # Años de experiencia en interpretación LSC
     años_experiencia: int = Field(..., alias="anios_experiencia", description="Años de experiencia como intérprete")
@@ -119,7 +123,6 @@ class Interprete(BaseModel):
                 "especialidades": ["Médica", "Educativa"],
                 "zonas_cobertura": ["Centro", "Norte"],
                 "disponibilidad": "Lunes a viernes 9:00-18:00",
-                "tarifa_hora": 85000.0,
                 "anios_experiencia": 5,
                 "certificaciones": ["Certificado LSC Nivel 3", "Curso de ética profesional"],
                 "telefono": "6047654321",
