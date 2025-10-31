@@ -129,6 +129,33 @@ class ArbolCategorias:
         """
         # Retornar solo las keys (nombres) de las subcategorías directas de la raíz
         return list(self.raiz.subcategorias.keys())
+    
+    # ---------------------------------------------------------------
+    def obtener_subcategorias(self, categoria: str) -> List[str]:
+        """
+        Obtiene las subcategorías de una categoría principal específica.
+        Usa el árbol de categorías para acceder directamente al nodo.
+        
+        Args:
+            categoria: Nombre de la categoría principal (Salud, Educación, Gobierno)
+        
+        Returns:
+            Lista de nombres de subcategorías, o lista vacía si la categoría no existe
+        
+        Complejidad temporal:
+            O(1) - Acceso directo al nodo en el diccionario de subcategorías de la raíz
+        
+        Estructura de datos usada:
+            Árbol (acceso directo al nodo hijo de la raíz)
+        """
+        # Acceder directamente a la categoría desde la raíz
+        if categoria in self.raiz.subcategorias:
+            nodo_categoria = self.raiz.subcategorias[categoria]
+            # Retornar las keys (nombres) de las subcategorías de este nodo
+            return list(nodo_categoria.subcategorias.keys())
+        
+        # Si la categoría no existe, retornar lista vacía
+        return []
 
     # ---------------------------------------------------------------
     def cargar_servicios(self, servicios: List[dict]):

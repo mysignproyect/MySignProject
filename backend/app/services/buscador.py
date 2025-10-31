@@ -108,17 +108,65 @@ class BuscadorServicios:
         """
         return list(self.servicios_por_zona.get(zona, []))
 
+    def buscar_servicios_por_texto(self, texto: str) -> List[dict]:
+        """
+        Busca servicios por texto libre en los campos: nombre, dirección y características_accesibilidad.
+        Búsqueda case-insensitive.
+        
+        Args:
+            texto: Texto a buscar (será convertido a minúsculas)
+        
+        Returns:
+            Lista de servicios que coincidan con el texto en alguno de los campos
+        
+        Complejidad temporal:
+            O(n) donde n es el número total de servicios.
+            Debe recorrer todos los servicios para buscar coincidencias.
+        
+        Estructura de datos usada:
+            Itera sobre el HashMap servicios_por_id (values())
+        """
+        texto_lower = texto.lower()
+        resultados = []
+        
+        for servicio in self.servicios_por_id.values():
+            # Buscar en nombre
+            nombre = servicio.get("nombre", "").lower()
+            if texto_lower in nombre:
+                resultados.append(servicio)
+                continue
+            
+            # Buscar en dirección
+            direccion = servicio.get("direccion", "").lower()
+            if texto_lower in direccion:
+                resultados.append(servicio)
+                continue
+            
+            # Buscar en características de accesibilidad
+            caracteristicas = servicio.get("caracteristicas_accesibilidad", [])
+            for caract in caracteristicas:
+                if texto_lower in caract.lower():
+                    resultados.append(servicio)
+                    break
+        
+        return resultados
+
     def filtrar_servicios(
         self,
         categoria: Optional[str] = None,
+        subcategoria: Optional[str] = None,
         zona: Optional[str] = None,
         tiene_interprete: Optional[bool] = None,
     ) -> List[dict]:
         """
+        Filtra servicios según múltiples criterios (lógica AND).
+        
+        ACTUALIZADO (Checkpoint #2): Ahora soporta filtro por subcategoría.
+        
         Complejidad temporal:
             - Mejor caso: si categoria o zona reduce mucho la búsqueda, O(k) donde k << n.
             - Peor caso: si no hay filtros iniciales, O(n) donde n = total de servicios.
-            """
+        """
         # Seleccionar lista inicial de candidatos según criterio que más reduzca la búsqueda.
         candidatos: List[dict]
 
@@ -136,6 +184,10 @@ class BuscadorServicios:
         # Aplicar filtros adicionales
         resultados: List[dict] = []
         for servicio in candidatos:
+            # Filtrar por subcategoría si se especificó
+            if subcategoria and servicio.get("subcategoria") != subcategoria:
+                continue
+            
             # Filtrar por zona si se pasó y la lista inicial fue por categoría
             if zona and servicio.get("zona") != zona:
                 continue
