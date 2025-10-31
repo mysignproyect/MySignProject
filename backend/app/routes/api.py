@@ -275,34 +275,202 @@ def get_servicio_por_id(servicio_id: str):
 @router.get(
     "/interpretes",
     response_model=List[Interprete],
-    summary="Listar intérpretes LSC",
-    description="Devuelve una lista de intérpretes de Lengua de Señas Colombiana. Permite filtrar por especialidad.",
+    summary="Listar intérpretes LSC con filtros",
+    description="Devuelve una lista de intérpretes de Lengua de Señas Colombiana. Permite filtrar por especialidad, zona y disponibilidad. Todos los filtros son opcionales y se combinan con lógica AND.",
     tags=["Intérpretes"]
 )
 def get_interpretes(
-    especialidad: Optional[str] = Query(None, description="Filtra intérpretes por especialidad (Médica, Legal, Educativa, Empresarial, Eventos)")
+    especialidad: Optional[str] = Query(None, description="Filtra por especialidad (Médica, Legal, Educativa, Empresarial, Eventos)"),
+    zona: Optional[str] = Query(None, description="Filtra por zona de cobertura (Centro, Norte, Sur, Oriente, Occidente)"),
+    disponibilidad: Optional[str] = Query(None, description="Filtra por tipo de disponibilidad (inmediata, tiempo_completo, por_horas, fines_semana)")
 ):
     """
-    Lista intérpretes LSC, con filtro opcional por especialidad.
+    Lista intérpretes LSC, con filtros opcionales combinables.
+    
+    ACTUALIZADO (Checkpoint #2): Ahora soporta filtros por zona y disponibilidad.
     
     Args:
         especialidad: Especialidad del intérprete (opcional)
+        zona: Zona de cobertura (opcional)
+        disponibilidad: Tipo de disponibilidad (opcional)
     
     Returns:
-        Lista de intérpretes
+        Lista de intérpretes que cumplan TODOS los filtros especificados.
+        Si no hay resultados, retorna array vacío [] (NO error).
     
-    Estructura de datos usada: HashMap (acceso por especialidad)
-    Complejidad: O(1) para buscar por especialidad, O(m) para listar todos
+    Estructura de datos usada: HashMap (filtrado eficiente)
+    Complejidad: O(k) donde k = intérpretes con especialidad seleccionada, O(m) sin filtros
     
     Ejemplo:
         GET /api/interpretes
         GET /api/interpretes?especialidad=Médica
+        GET /api/interpretes?especialidad=Médica&zona=Centro&disponibilidad=tiempo_completo
     """
-    if especialidad:
-        return buscador.buscar_interpretes_por_especialidad(especialidad)
+    # Si no hay filtros, retornar todos los intérpretes
+    if not any([especialidad, zona, disponibilidad]):
+        return list(buscador.interpretes_por_id.values())
     
-    # Si no hay filtro, retornar todos los intérpretes
-    return list(buscador.interpretes_por_id.values())
+    # Usar el método de filtrado combinado
+    resultados = buscador.filtrar_interpretes(
+        especialidad=especialidad,
+        zona=zona,
+        disponibilidad=disponibilidad
+    )
+    
+    # Retornar array vacío si no hay resultados (NO lanzar error)
+    return resultados
+
+
+@router.get(
+    "/interpretes/especialidad/{especialidad}",
+    response_model=List[Interprete],
+    summary="Intérpretes por especialidad",
+    description="Obtiene intérpretes que tengan una especialidad específica. Un intérprete puede tener múltiples especialidades.",
+    tags=["Intérpretes"]
+)
+def get_interpretes_por_especialidad(especialidad: str):
+    """
+    Obtiene intérpretes por especialidad específica.
+    
+    Args:
+        especialidad: Especialidad del intérprete (Médica, Legal, Educativa, Empresarial, Eventos)
+    
+    Returns:
+        Lista de intérpretes con esa especialidad
+    
+    Raises:
+        HTTPException 400: Si la especialidad no es válida
+    
+    Estructura de datos usada: HashMap (acceso directo por especialidad)
+    Complejidad: O(1) para acceder al HashMap, O(k) para retornar la lista
+    
+    Ejemplo:
+        GET /api/interpretes/especialidad/Médica
+        GET /api/interpretes/especialidad/Legal
+    """
+    # Validar que la especialidad sea válida
+    especialidades_validas = ["Médica", "Legal", "Educativa", "Empresarial", "Eventos"]
+    if especialidad not in especialidades_validas:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Especialidad '{especialidad}' no válida. Especialidades disponibles: {', '.join(especialidades_validas)}"
+        )
+    
+    # Buscar intérpretes con esa especialidad usando HashMap
+    resultados = buscador.buscar_interpretes_por_especialidad(especialidad)
+    
+    # Retornar array vacío si no hay resultados (NO error)
+    return resultados
+
+
+@router.get(
+    "/interpretes/zona/{zona}",
+    response_model=List[Interprete],
+    summary="Intérpretes por zona de cobertura",
+    description="Obtiene intérpretes que cubran una zona específica de Medellín. Un intérprete puede cubrir múltiples zonas. Permite filtro adicional por especialidad.",
+    tags=["Intérpretes"]
+)
+def get_interpretes_por_zona(
+    zona: str,
+    especialidad: Optional[str] = Query(None, description="Filtro adicional por especialidad")
+):
+    """
+    Obtiene intérpretes que cubran una zona geográfica específica.
+    
+    Args:
+        zona: Zona de cobertura (Centro, Norte, Sur, Oriente, Occidente)
+        especialidad: Filtro adicional por especialidad (opcional)
+    
+    Returns:
+        Lista de intérpretes que cubran esa zona
+    
+    Raises:
+        HTTPException 400: Si la zona no es válida
+    
+    Estructura de datos usada: HashMap (itera sobre intérpretes)
+    Complejidad: O(m) donde m = número de intérpretes
+    
+    Ejemplo:
+        GET /api/interpretes/zona/Centro
+        GET /api/interpretes/zona/Norte?especialidad=Médica
+    """
+    # Validar que la zona sea válida
+    zonas_validas = ["Centro", "Norte", "Sur", "Oriente", "Occidente"]
+    if zona not in zonas_validas:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Zona '{zona}' no válida. Zonas disponibles: {', '.join(zonas_validas)}"
+        )
+    
+    # Buscar intérpretes que cubran esa zona
+    if especialidad:
+        # Si hay filtro de especialidad, usar el método de filtrado combinado
+        resultados = buscador.filtrar_interpretes(
+            especialidad=especialidad,
+            zona=zona
+        )
+    else:
+        # Si no hay filtro adicional, buscar solo por zona
+        resultados = buscador.buscar_interpretes_por_zona(zona)
+    
+    # Retornar array vacío si no hay resultados (NO error)
+    return resultados
+
+
+@router.get(
+    "/interpretes/disponibilidad",
+    response_model=List[Interprete],
+    summary="Intérpretes por disponibilidad",
+    description="Filtra intérpretes por tipo de disponibilidad. Permite filtros adicionales por especialidad y zona.",
+    tags=["Intérpretes"]
+)
+def get_interpretes_por_disponibilidad(
+    tipo: str = Query(..., description="Tipo de disponibilidad: inmediata, tiempo_completo, por_horas, fines_semana"),
+    especialidad: Optional[str] = Query(None, description="Filtro adicional por especialidad"),
+    zona: Optional[str] = Query(None, description="Filtro adicional por zona")
+):
+    """
+    Filtra intérpretes por tipo de disponibilidad.
+    
+    Args:
+        tipo: Tipo de disponibilidad (requerido)
+            - "inmediata": Disponibilidad inmediata o flexible
+            - "tiempo_completo": Tiempo completo o full time
+            - "por_horas": Trabajo por horas
+            - "fines_semana": Disponible fines de semana
+        especialidad: Filtro adicional por especialidad (opcional)
+        zona: Filtro adicional por zona (opcional)
+    
+    Returns:
+        Lista de intérpretes que coincidan con la disponibilidad
+    
+    Raises:
+        HTTPException 400: Si el tipo de disponibilidad no es válido
+    
+    Estructura de datos usada: HashMap (itera sobre intérpretes)
+    Complejidad: O(m) donde m = número de intérpretes
+    
+    Ejemplo:
+        GET /api/interpretes/disponibilidad?tipo=tiempo_completo
+        GET /api/interpretes/disponibilidad?tipo=por_horas&especialidad=Médica&zona=Centro
+    """
+    # Validar que el tipo sea válido
+    tipos_validos = ["inmediata", "tiempo_completo", "por_horas", "fines_semana"]
+    if tipo.lower() not in tipos_validos:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Tipo de disponibilidad '{tipo}' no válido. Tipos disponibles: {', '.join(tipos_validos)}"
+        )
+    
+    # Usar el método de filtrado combinado
+    resultados = buscador.filtrar_interpretes(
+        especialidad=especialidad,
+        zona=zona,
+        disponibilidad=tipo
+    )
+    
+    # Retornar array vacío si no hay resultados (NO error)
+    return resultados
 
 
 @router.get(
