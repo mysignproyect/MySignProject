@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Literal, Optional
+from typing import List, Literal, Optional, Dict  
 
 
 class Servicio(BaseModel):
@@ -128,5 +129,63 @@ class Interprete(BaseModel):
                 "telefono": "6047654321",
                 "whatsapp": "3107654321",
                 "email": "laura.gomez@example.com"
+            }
+        }
+# ============================================================================
+# MODELOS DE RESPUESTA PARA ENDPOINTS ESPECIALES
+# ============================================================================
+
+class EstadisticasResponse(BaseModel):
+    """
+    Modelo de respuesta para el endpoint de estadísticas generales.
+    
+    Proporciona un resumen cuantitativo de los recursos disponibles en el sistema:
+    servicios, intérpretes, categorías y zonas.
+    """
+    
+    # Total de servicios registrados en el sistema
+    total_servicios: int = Field(..., description="Cantidad total de servicios disponibles")
+    
+    # Distribución de servicios por categoría
+    servicios_por_categoria: Dict[str, int] = Field(
+        ...,
+        description="Diccionario con el conteo de servicios por cada categoría"
+    )
+    
+    # Total de intérpretes LSC registrados
+    total_interpretes: int = Field(..., description="Cantidad total de intérpretes LSC disponibles")
+    
+    # Distribución de intérpretes por especialidad
+    interpretes_por_especialidad: Dict[str, int] = Field(
+        ...,
+        description="Diccionario con el conteo de intérpretes por cada especialidad"
+    )
+    
+    # Lista de zonas geográficas disponibles
+    zonas_disponibles: List[str] = Field(
+        ...,
+        description="Lista de zonas geográficas de Medellín cubiertas"
+    )
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "total_servicios": 10,
+                "servicios_por_categoria": {
+                    "Salud": 3,
+                    "Educación": 3,
+                    "Gobierno": 2,
+                    "Comercio": 1,
+                    "Cultura": 1
+                },
+                "total_interpretes": 4,
+                "interpretes_por_especialidad": {
+                    "Médica": 2,
+                    "Legal": 2,
+                    "Educativa": 3,
+                    "Empresarial": 2,
+                    "Eventos": 1
+                },
+                "zonas_disponibles": ["Centro", "Norte", "Sur", "Oriente", "Occidente"]
             }
         }
