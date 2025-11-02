@@ -108,17 +108,65 @@ class BuscadorServicios:
         """
         return list(self.servicios_por_zona.get(zona, []))
 
+    def buscar_servicios_por_texto(self, texto: str) -> List[dict]:
+        """
+        Busca servicios por texto libre en los campos: nombre, dirección y características_accesibilidad.
+        Búsqueda case-insensitive.
+        
+        Args:
+            texto: Texto a buscar (será convertido a minúsculas)
+        
+        Returns:
+            Lista de servicios que coincidan con el texto en alguno de los campos
+        
+        Complejidad temporal:
+            O(n) donde n es el número total de servicios.
+            Debe recorrer todos los servicios para buscar coincidencias.
+        
+        Estructura de datos usada:
+            Itera sobre el HashMap servicios_por_id (values())
+        """
+        texto_lower = texto.lower()
+        resultados = []
+        
+        for servicio in self.servicios_por_id.values():
+            # Buscar en nombre
+            nombre = servicio.get("nombre", "").lower()
+            if texto_lower in nombre:
+                resultados.append(servicio)
+                continue
+            
+            # Buscar en dirección
+            direccion = servicio.get("direccion", "").lower()
+            if texto_lower in direccion:
+                resultados.append(servicio)
+                continue
+            
+            # Buscar en características de accesibilidad
+            caracteristicas = servicio.get("caracteristicas_accesibilidad", [])
+            for caract in caracteristicas:
+                if texto_lower in caract.lower():
+                    resultados.append(servicio)
+                    break
+        
+        return resultados
+
     def filtrar_servicios(
         self,
         categoria: Optional[str] = None,
+        subcategoria: Optional[str] = None,
         zona: Optional[str] = None,
         tiene_interprete: Optional[bool] = None,
     ) -> List[dict]:
         """
+        Filtra servicios según múltiples criterios (lógica AND).
+        
+        ACTUALIZADO (Checkpoint #2): Ahora soporta filtro por subcategoría.
+        
         Complejidad temporal:
             - Mejor caso: si categoria o zona reduce mucho la búsqueda, O(k) donde k << n.
             - Peor caso: si no hay filtros iniciales, O(n) donde n = total de servicios.
-            """
+        """
         # Seleccionar lista inicial de candidatos según criterio que más reduzca la búsqueda.
         candidatos: List[dict]
 
@@ -136,6 +184,10 @@ class BuscadorServicios:
         # Aplicar filtros adicionales
         resultados: List[dict] = []
         for servicio in candidatos:
+            # Filtrar por subcategoría si se especificó
+            if subcategoria and servicio.get("subcategoria") != subcategoria:
+                continue
+            
             # Filtrar por zona si se pasó y la lista inicial fue por categoría
             if zona and servicio.get("zona") != zona:
                 continue
@@ -163,6 +215,149 @@ class BuscadorServicios:
             O(1) para obtener la lista; iterar sobre la lista es O(k).
         """
         return list(self.interpretes_por_especialidad.get(especialidad, []))
+    
+    def buscar_interpretes_por_zona(self, zona: str) -> List[dict]:
+        """
+        Busca intérpretes que cubran una zona específica de Medellín.
+        Un intérprete puede cubrir múltiples zonas (lista en zonas_cobertura).
+        
+        Args:
+            zona: Zona geográfica (Centro, Norte, Sur, Oriente, Occidente)
+        
+        Returns:
+            Lista de intérpretes que cubren esa zona
+        
+        Complejidad temporal:
+            O(m) donde m = número total de intérpretes.
+            Debe recorrer todos los intérpretes y verificar si la zona está en su lista.
+        
+        Estructura de datos usada:
+            Itera sobre HashMap interpretes_por_id, busca zona en lista zonas_cobertura
+        """
+        resultados = []
+        
+        for interprete in self.interpretes_por_id.values():
+            # Verificar si la zona está en la lista de zonas_cobertura del intérprete
+            zonas = interprete.get("zonas_cobertura", [])
+            if zona in zonas:
+                resultados.append(interprete)
+        
+        return resultados
+
+
+    def buscar_interpretes_por_disponibilidad(self, tipo_disponibilidad: str) -> List[dict]:
+        """
+        Busca intérpretes por tipo de disponibilidad mediante búsqueda de palabras clave.
+        
+        Args:
+            tipo_disponibilidad: Tipo de disponibilidad a buscar
+                - "inmediata": Busca "disponible", "inmediata", "ahora"
+                - "tiempo_completo": Busca "tiempo completo", "completo", "full"
+                - "por_horas": Busca "horas", "por hora"
+                - "fines_semana": Busca "fin", "semana", "sábado", "domingo"
+        
+        Returns:
+            Lista de intérpretes que coincidan con el tipo de disponibilidad
+        
+        Complejidad temporal:
+            O(m) donde m = número total de intérpretes.
+        
+        Estructura de datos usada:
+            Itera sobre HashMap interpretes_por_id
+        """
+        # Mapeo de tipos a palabras clave a buscar
+        palabras_clave = {
+            "inmediata": ["disponible", "inmediata", "ahora"],
+            "tiempo_completo": ["tiempo completo", "completo", "full"],
+            "por_horas": ["horas", "por hora"],
+            "fines_semana": ["fin", "semana", "sábado", "domingo"]
+        }
+        
+        # Obtener palabras clave para el tipo solicitado
+        keywords = palabras_clave.get(tipo_disponibilidad.lower(), [])
+        if not keywords:
+            # Si el tipo no es reconocido, retornar vacío
+            return []
+        
+        resultados = []
+        
+        for interprete in self.interpretes_por_id.values():
+            disponibilidad = interprete.get("disponibilidad", "").lower()
+            
+            # Verificar si alguna palabra clave está en la disponibilidad
+            for keyword in keywords:
+                if keyword in disponibilidad:
+                    resultados.append(interprete)
+                    break  # Evitar duplicados si hay múltiples coincidencias
+        
+        return resultados
+
+
+    def filtrar_interpretes(
+        self,
+        especialidad: Optional[str] = None,
+        zona: Optional[str] = None,
+        disponibilidad: Optional[str] = None
+    ) -> List[dict]:
+        """
+        Filtra intérpretes según múltiples criterios (lógica AND).
+        
+        Args:
+            especialidad: Especialidad del intérprete (opcional)
+            zona: Zona de cobertura (opcional)
+            disponibilidad: Tipo de disponibilidad (opcional)
+        
+        Returns:
+            Lista de intérpretes que cumplan TODOS los filtros especificados
+        
+        Complejidad temporal:
+            - Mejor caso: O(k) si especialidad reduce mucho la búsqueda
+            - Peor caso: O(m) donde m = total de intérpretes
+        
+        Estructura de datos usada:
+            HashMap (acceso por especialidad) + iteración para filtros adicionales
+        """
+        # Seleccionar lista inicial de candidatos
+        candidatos: List[dict]
+        
+        if especialidad:
+            # Usar HashMap de especialidad para reducir búsqueda
+            candidatos = self.buscar_interpretes_por_especialidad(especialidad)
+        else:
+            # Si no hay filtro de especialidad, tomar todos los intérpretes
+            candidatos = list(self.interpretes_por_id.values())
+        
+        # Aplicar filtros adicionales
+        resultados: List[dict] = []
+        
+        for interprete in candidatos:
+            # Filtrar por zona si se especificó
+            if zona:
+                zonas_cobertura = interprete.get("zonas_cobertura", [])
+                if zona not in zonas_cobertura:
+                    continue
+            
+            # Filtrar por disponibilidad si se especificó
+            if disponibilidad:
+                # Mapeo de tipos a palabras clave
+                palabras_clave = {
+                    "inmediata": ["disponible", "inmediata", "ahora"],
+                    "tiempo_completo": ["tiempo completo", "completo", "full"],
+                    "por_horas": ["horas", "por hora"],
+                    "fines_semana": ["fin", "semana", "sábado", "domingo"]
+                }
+                
+                keywords = palabras_clave.get(disponibilidad.lower(), [])
+                disponibilidad_texto = interprete.get("disponibilidad", "").lower()
+                
+                # Verificar si alguna palabra clave coincide
+                coincide = any(keyword in disponibilidad_texto for keyword in keywords)
+                if not coincide:
+                    continue
+            
+            resultados.append(interprete)
+        
+        return resultados
 
     def obtener_todas_categorias(self) -> List[str]:
         """

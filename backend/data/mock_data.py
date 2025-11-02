@@ -1,3 +1,11 @@
+"""
+Datos mock (de prueba) para desarrollo y testing del MVP.
+
+CAMBIO IMPORTANTE (Checkpoint #2):
+- Se eliminó el campo 'tarifa_hora' de todos los intérpretes.
+- Esto simplifica el MVP enfocándose en conectar usuarios con intérpretes.
+"""
+
 SERVICIOS_MOCK = [
     # --- Servicios de Salud ---
     {
@@ -148,6 +156,8 @@ SERVICIOS_MOCK = [
     }
 ]
 
+# INTERPRETES_MOCK: Datos de intérpretes LSC para el MVP
+# CAMBIO: Se eliminó el campo 'tarifa_hora' de todos los intérpretes
 INTERPRETES_MOCK = [
     {
         "id": "i1",
@@ -156,7 +166,6 @@ INTERPRETES_MOCK = [
         "especialidades": ["Médica", "Legal"],
         "zonas_cobertura": ["Centro", "Norte"],
         "disponibilidad": "Lunes a Viernes 8:00 - 18:00",
-        "tarifa_hora": 60000.0,
         "años_experiencia": 5,
         "certificaciones": ["Certificación Nacional de Intérprete LSC Nivel II"],
         "telefono": "+57 3104567890",
@@ -170,7 +179,6 @@ INTERPRETES_MOCK = [
         "especialidades": ["Educativa", "Empresarial"],
         "zonas_cobertura": ["Sur", "Centro"],
         "disponibilidad": "Lunes a Sábado 7:00 - 19:00",
-        "tarifa_hora": 45000.0,
         "años_experiencia": 3,
         "certificaciones": ["Certificado de Competencia en Interpretación Educativa"],
         "telefono": "+57 3129876543",
@@ -184,7 +192,6 @@ INTERPRETES_MOCK = [
         "especialidades": ["Legal", "Eventos"],
         "zonas_cobertura": ["Occidente", "Centro"],
         "disponibilidad": "Lunes a Domingo 8:00 - 20:00",
-        "tarifa_hora": 70000.0,
         "años_experiencia": 8,
         "certificaciones": ["Certificado Avanzado en Interpretación Legal"],
         "telefono": "+57 3145678912",
@@ -198,7 +205,6 @@ INTERPRETES_MOCK = [
         "especialidades": ["Educativa", "Médica", "Empresarial"],
         "zonas_cobertura": ["Norte", "Oriente"],
         "disponibilidad": "Lunes a Viernes 8:00 - 17:00",
-        "tarifa_hora": 50000.0,
         "años_experiencia": 4,
         "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
         "telefono": "+57 3156789123",

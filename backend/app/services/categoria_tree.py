@@ -40,7 +40,12 @@ class ArbolCategorias:
     """
     Representa el árbol general de categorías de servicios.
 
-    Estructura base:
+    CAMBIO IMPORTANTE (Checkpoint #2):
+    - Se eliminó la categoría "Intérpretes" del árbol.
+    - Los intérpretes son una entidad independiente manejada por HashMaps.
+    - El árbol solo maneja las 3 categorías de SERVICIOS: Salud, Educación, Gobierno.
+
+    Estructura actual:
         Raíz
         ├── Salud
         │   ├── Hospitales
@@ -50,11 +55,9 @@ class ArbolCategorias:
         │   ├── Colegios
         │   ├── Universidades
         │   └── Institutos
-        ├── Gobierno
-        │   ├── Alcaldías
-        │   └── Entidades Públicas
-        └── Intérpretes
-            └── Por Especialidad
+        └── Gobierno
+            ├── Alcaldías
+            └── Entidades Públicas
     """
 
     def __init__(self):
@@ -74,14 +77,17 @@ class ArbolCategorias:
         for sub in ["Alcaldías", "Entidades Públicas"]:
             gobierno.add_subcategoria(sub)
 
-        interpretes = self.raiz.add_subcategoria("Intérpretes")
-        interpretes.add_subcategoria("Por Especialidad")
+        # ELIMINADO: Intérpretes ya no es parte del árbol de categorías
+        # Los intérpretes se manejan independientemente mediante HashMaps
 
     # ---------------------------------------------------------------
     def buscar_servicios_categoria(
         self, categoria: str, subcategoria: Optional[str] = None
     ) -> List[dict]:
         """
+        Busca servicios en el árbol por categoría y opcionalmente por subcategoría.
+        Usa RECURSIÓN para recorrer el árbol.
+
         COMPLEJIDAD TEMPORAL: O(n), donde n es el número total de nodos en el árbol.
         """
 
@@ -112,24 +118,50 @@ class ArbolCategorias:
     # ---------------------------------------------------------------
     def obtener_todas_categorias(self) -> List[str]:
         """
-        COMPLEJIDAD TEMPORAL: O(n), donde n es el número total de nodos.
+        Retorna SOLO las 3 categorías principales: Salud, Educación, Gobierno.
+        
+        CAMBIO (Checkpoint #2):
+        - Ahora retorna solo las categorías hijas directas de la raíz.
+        - Excluye la raíz misma y no incluye subcategorías.
+        - No incluye "Intérpretes" (ya fue eliminado del árbol).
+
+        COMPLEJIDAD TEMPORAL: O(1) - Solo accede a las categorías de primer nivel.
         """
-        categorias: List[str] = []
-
-        def recorrer(nodo: NodoCategoria):
-            # Caso base: si el nodo no tiene subcategorías, retornamos su nombre
-            categorias.append(nodo.nombre)
-
-            # Caso recursivo: recorrer todas las subcategorías
-            for sub in nodo.subcategorias.values():
-                recorrer(sub)
-
-        recorrer(self.raiz)
-        return categorias
+        # Retornar solo las keys (nombres) de las subcategorías directas de la raíz
+        return list(self.raiz.subcategorias.keys())
+    
+    # ---------------------------------------------------------------
+    def obtener_subcategorias(self, categoria: str) -> List[str]:
+        """
+        Obtiene las subcategorías de una categoría principal específica.
+        Usa el árbol de categorías para acceder directamente al nodo.
+        
+        Args:
+            categoria: Nombre de la categoría principal (Salud, Educación, Gobierno)
+        
+        Returns:
+            Lista de nombres de subcategorías, o lista vacía si la categoría no existe
+        
+        Complejidad temporal:
+            O(1) - Acceso directo al nodo en el diccionario de subcategorías de la raíz
+        
+        Estructura de datos usada:
+            Árbol (acceso directo al nodo hijo de la raíz)
+        """
+        # Acceder directamente a la categoría desde la raíz
+        if categoria in self.raiz.subcategorias:
+            nodo_categoria = self.raiz.subcategorias[categoria]
+            # Retornar las keys (nombres) de las subcategorías de este nodo
+            return list(nodo_categoria.subcategorias.keys())
+        
+        # Si la categoría no existe, retornar lista vacía
+        return []
 
     # ---------------------------------------------------------------
     def cargar_servicios(self, servicios: List[dict]):
         """
+        Carga servicios en el árbol según su categoría y subcategoría.
+        
         COMPLEJIDAD TEMPORAL: O(n), siendo n el número de servicios.
         Cada inserción en un nodo es O(1).
         """
