@@ -4,10 +4,9 @@ import Servicios from "../components/Servicios";
 import Footer from "../components/FooterDeLaPagina";
 import img_SN from "../assets/img/imagenSobreNosotros.jpeg";
 
-
 export default function InicioPage() {
   return (
-    <body>
+    <>
       <Nav />
       <main>
         <div id="container_info_nosotros">
@@ -18,13 +17,13 @@ export default function InicioPage() {
                 y un sistema de emergencias inclusivo.</p>
             </section>
             <article id="img_nosotros">
-              <img src={img_SN} alt="" id="Img" />
+              <img src={img_SN} alt="Imagen sobre nosotros" id="Img" />
             </article>
         </div>
         <h1 id="titulo_servicios">Servicios</h1>
         <Servicios />
       </main>
       <Footer />
-    </body>
+    </>
   );
 }
