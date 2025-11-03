@@ -2,8 +2,7 @@ import { useState } from "react";
 import "../assets/css/Servicios.css";
 import logo_serv_uno from "../assets/img/ServicioNumeroUno.jpeg";
 import logo_serv_dos from "../assets/img/ServicioNumeroDos.jpeg";
-import pagina_interpretes from "../assets/pages/InterpretesPage.jsx";
-import pagina_entidad from "../assets/pages/EntidadesPage.jsx";
+import { Link } from "react-router-dom";
 
 export default function Servicios() {
   return (
@@ -14,11 +13,9 @@ export default function Servicios() {
             </div>
             <div id="info_servicio_uno">
                 <p>Accede a un directorio de intérpretes de Lengua de Señas Colombiana, filtrados por especialidad, disponibilidad y zona.</p>
-                <a href={pagina_interpretes} id="info_servicio_button_link">
-                    <button id="info_servicio_button"> 
-                        Encontrar interprete
-                    </button>
-                </a>
+                <Link to="/interpretes" id="info_servicio_button_link">
+                  <button id="info_servicio_button">Encontrar intérprete</button>
+                </Link>
             </div>
         </section>
         <section id="servicio_numero_dos">
@@ -28,11 +25,10 @@ export default function Servicios() {
             <div id="info_servicio_dos">
                 <h2>Contactarse con entidad</h2>
                 <p>Ubica hospitales y centros de salud accesibles en Medellín, con información de contacto directo y servicios inclusivos.</p>
-                <a href={pagina_entidad} id="info_servicio_button_link">
-                    <button id="info_servicio_button"> 
-                       Contactarse con entidad
-                    </button>
-                </a>
+                 <Link to="/entidades" id="info_servicio_button_link">
+                   <button id="info_servicio_button">Contactarse con entidad</button>
+                 </Link>
+
             </div>
         </section>
     </div>
