@@ -53,11 +53,11 @@ class TestBuscadorServicios(unittest.TestCase):
         self.assertEqual(len(interpretes), 0)
 
     def test_filtrar_servicios_por_subcategoria(self):
-        resultado = self.buscador.filtrar_servicios(categoria="Salud", subcategoria="Clínicas")
-        self.assertGreater(len(resultado), 0, "No se encontraron servicios en la subcategoría 'Clínicas'.")
+        resultado = self.buscador.filtrar_servicios(categoria="Salud", subcategoria="Hospital General")
+        self.assertGreater(len(resultado), 0, "No se encontraron servicios en la subcategoría 'Hospital General'.")
         self.assertTrue(
-            all(s["subcategoria"] == "Clínicas" for s in resultado),
-            "Se encontraron servicios que no pertenecen a la subcategoría 'Clínicas'."
+            all(s["subcategoria"] == "Hospital General" for s in resultado),
+            "Se encontraron servicios que no pertenecen a la subcategoría 'Hospital General'."
         )
 
 
