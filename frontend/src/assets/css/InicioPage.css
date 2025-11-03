@@ -1,0 +1,49 @@
+main{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 90px;
+}
+
+#container_info_nosotros{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+#info_nosotros{
+    width: 50%;
+    height: auto;
+}
+
+#sobreNosotros h1{
+    padding-bottom: 40px;
+    font-size: 2.5rem;
+
+}
+
+#sobreNosotros p{
+    width: 80%;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+#img_nosotros{
+    width: 50%;
+    height: auto;
+    display: flex;  
+}
+
+#img_nosotros img{
+    width:  100%;
+    justify-content: end;
+    height: auto;
+}
+
+#titulo_servicios {
+    width: 100%;
+    text-align: start;
+    margin: 60px 0 20px 0;
+}
