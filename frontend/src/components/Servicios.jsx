@@ -28,7 +28,6 @@ export default function Servicios() {
                  <Link to="/entidades" id="info_servicio_button_link">
                    <button id="info_servicio_button">Contactarse con entidad</button>
                  </Link>
-
             </div>
         </section>
     </div>
