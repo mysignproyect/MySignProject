@@ -1,0 +1,42 @@
+#interpretes{
+    margin: 20px;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.Interprete_card_general{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.interprete_card{
+    width: max-content;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.interprete_card ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.volver_btn{
+    height: 30px;
+    width: 150px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

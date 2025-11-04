@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../assets/css/CardInterpretes.css";
 
 export default function CardInterpretes({ fetchFunction, onVolver, mostrarVolver }) {
   const [interpretes, setInterpretes] = useState([]);
@@ -8,7 +9,7 @@ export default function CardInterpretes({ fetchFunction, onVolver, mostrarVolver
     const cargar = async () => {
       setCargando(true);
       try {
-        const data = await fetchFunction(); // Llama al servicio recibido
+        const data = await fetchFunction();
         setInterpretes(data || []);
       } catch (error) {
         console.error("Error cargando intérpretes:", error);
@@ -22,35 +23,38 @@ export default function CardInterpretes({ fetchFunction, onVolver, mostrarVolver
   }, [fetchFunction]);
 
   return (
-    <div id="interpretes">
+    <div id="interpretes" className="interpretes">
       {mostrarVolver && (
-        <button onClick={onVolver} className="volver-btn">
+        <button onClick={onVolver} className="volver_btn">
           ← Volver
         </button>
       )}
+        <div className="Interprete_card_general">
+            {cargando ? (
+              <p>Cargando intérpretes...</p>
+            ) : interpretes.length > 0 ? (
+              interpretes.map((int) => (
 
-      {cargando ? (
-        <p>Cargando intérpretes...</p>
-      ) : interpretes.length > 0 ? (
-        interpretes.map((int) => (
-          <div key={int.id} className="interprete-card">
-            <img
-              src={int.foto || "https://via.placeholder.com/200x200.png?text=Sin+Foto"}
-              alt={int.nombre}
-            />
-            <ul>
-              <li><strong>{int.nombre}</strong></li>
-              <li>Especialidad: {int.especialidades?.join(", ")}</li>
-              <li>Zonas: {int.zonas_cobertura?.join(", ")}</li>
-              <li>Disponibilidad: {int.disponibilidad}</li>
-              <li>Tel: {int.telefono}</li>
-              <li>Correo: {int.email}</li>
-            </ul>
-          </div>
-        ))
-      ) : (
-        <p>No hay intérpretes disponibles.</p>
-      )}
+                <div key={int.id} className="interprete_card">
+                    <img
+                    src={int.foto || "https://via.placeholder.com/200x200.png?text=Sin+Foto"}
+                    alt={int.nombre}
+                    />
+                    <ul>
+                    <li><strong>{int.nombre}</strong></li>
+                    <li>Especialidad: {int.especialidades?.join(", ")}</li>
+                    <li>Zonas: {int.zonas_cobertura?.join(", ")}</li>
+                    <li>Disponibilidad: {int.disponibilidad}</li>
+                    <li>Tel: {int.telefono}</li>
+                    <li>Correo: {int.email}</li>
+                    </ul>
+                </div>
+                  
+              ))
+            ) : (
+              <p>No hay intérpretes disponibles.</p>
+            )}
+        </div>
     </div>
   );
 }
