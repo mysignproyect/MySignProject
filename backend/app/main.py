@@ -1,8 +1,3 @@
-"""
-Archivo principal de la API My Sign.
-Define la aplicación FastAPI, configura CORS, maneja excepciones y monta los routers de endpoints.
-"""
-
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -116,5 +111,4 @@ def read_root():
     }
 
 
-# Registro del router principal con todos los endpoints
 app.include_router(api_router)

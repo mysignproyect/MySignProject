@@ -64,6 +64,7 @@ class ArbolCategorias:
         """Inicializa la raíz y construye las categorías y subcategorías predefinidas."""
         self.raiz = NodoCategoria("Raíz")
 
+        # Construcción manual de la jerarquía de categorías
         salud = self.raiz.add_subcategoria("Salud")
         for sub in ["Hospitales", "Clínicas", "Centros de Salud"]:
             salud.add_subcategoria(sub)
