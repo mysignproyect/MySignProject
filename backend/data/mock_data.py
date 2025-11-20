@@ -1,13 +1,16 @@
 """
 Datos mock (de prueba) para desarrollo y testing del MVP.
 
-CAMBIO IMPORTANTE (Checkpoint #2):
-- Se eliminó el campo 'tarifa_hora' de todos los intérpretes.
-- Esto simplifica el MVP enfocándose en conectar usuarios con intérpretes.
+ACTUALIZADO: 18 servicios y 7 intérpretes LSC
+- Servicios distribuidos en 5 zonas de Medellín
+- 6 servicios de Salud, 6 de Educación, 4 de Gobierno, 2 variados
+- 7 intérpretes con especialidades y zonas variadas
 """
 
 SERVICIOS_MOCK = [
-    # --- Servicios de Salud ---
+    # ========================================================================
+    # SERVICIOS DE SALUD (6 servicios)
+    # ========================================================================
     {
         "id": "s1",
         "nombre": "Hospital San Vicente Fundación",
@@ -50,8 +53,52 @@ SERVICIOS_MOCK = [
         "tiene_interprete_lsc": True,
         "distancia_aproximada": 3.2
     },
+    {
+        "id": "s11",
+        "nombre": "Hospital Pablo Tobón Uribe",
+        "categoria": "Salud",
+        "subcategoria": "Hospital Privado",
+        "direccion": "Calle 78B #69-240, Medellín",
+        "telefono": "+57 604 4459000",
+        "whatsapp": "+57 3207654321",
+        "zona": "Norte",
+        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC 24/7", "Tecnología asistiva"],
+        "horarios": "Lunes a Domingo 24 horas",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 4.2
+    },
+    {
+        "id": "s12",
+        "nombre": "Centro de Salud Manrique",
+        "categoria": "Salud",
+        "subcategoria": "Centro de Salud",
+        "direccion": "Carrera 37 #67-50, Medellín",
+        "telefono": "+57 604 5123456",
+        "whatsapp": "+57 3158765432",
+        "zona": "Oriente",
+        "caracteristicas_accesibilidad": ["Rampas", "Señalización visual clara"],
+        "horarios": "Lunes a Viernes 7:00 - 17:00",
+        "tiene_interprete_lsc": False,
+        "distancia_aproximada": 5.8
+    },
+    {
+        "id": "s13",
+        "nombre": "Clínica CES",
+        "categoria": "Salud",
+        "subcategoria": "Clínica Universitaria",
+        "direccion": "Calle 10A #22-04, Medellín",
+        "telefono": "+57 604 3053500",
+        "whatsapp": "+57 3009876543",
+        "zona": "Sur",
+        "caracteristicas_accesibilidad": ["Rampas", "Personal bilingüe", "Atención prioritaria"],
+        "horarios": "Lunes a Viernes 7:00 - 19:00, Sábado 8:00 - 14:00",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 6.3
+    },
 
-    # --- Servicios de Educación ---
+    # ========================================================================
+    # SERVICIOS DE EDUCACIÓN (6 servicios)
+    # ========================================================================
     {
         "id": "s4",
         "nombre": "Universidad de Antioquia",
@@ -94,8 +141,52 @@ SERVICIOS_MOCK = [
         "tiene_interprete_lsc": True,
         "distancia_aproximada": 6.5
     },
+    {
+        "id": "s14",
+        "nombre": "Universidad Pontificia Bolivariana",
+        "categoria": "Educación",
+        "subcategoria": "Universidad Privada",
+        "direccion": "Circular 1 #70-01, Medellín",
+        "telefono": "+57 604 4488388",
+        "whatsapp": "+57 3123456789",
+        "zona": "Centro",
+        "caracteristicas_accesibilidad": ["Rampas", "Ascensores", "Interpretación LSC bajo solicitud"],
+        "horarios": "Lunes a Viernes 7:00 - 21:00, Sábado 8:00 - 13:00",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 3.5
+    },
+    {
+        "id": "s15",
+        "nombre": "ITM - Instituto Tecnológico Metropolitano",
+        "categoria": "Educación",
+        "subcategoria": "Instituto Técnico",
+        "direccion": "Calle 54A #30-01, Medellín",
+        "telefono": "+57 604 4600727",
+        "whatsapp": None,
+        "zona": "Centro",
+        "caracteristicas_accesibilidad": ["Rampas", "Señalización inclusiva", "Aulas adaptadas"],
+        "horarios": "Lunes a Viernes 6:00 - 22:00, Sábado 7:00 - 17:00",
+        "tiene_interprete_lsc": False,
+        "distancia_aproximada": 2.7
+    },
+    {
+        "id": "s16",
+        "nombre": "Colegio Gimnasio Los Alcázares",
+        "categoria": "Educación",
+        "subcategoria": "Colegio Privado",
+        "direccion": "Carrera 73 #32D-51, Medellín",
+        "telefono": "+57 604 2509090",
+        "whatsapp": "+57 3176543210",
+        "zona": "Occidente",
+        "caracteristicas_accesibilidad": ["Rampas", "Programa de inclusión", "Personal capacitado"],
+        "horarios": "Lunes a Viernes 7:00 - 15:00",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 7.2
+    },
 
-    # --- Servicios de Gobierno ---
+    # ========================================================================
+    # SERVICIOS DE GOBIERNO (4 servicios)
+    # ========================================================================
     {
         "id": "s7",
         "nombre": "Alcaldía de Medellín",
@@ -124,8 +215,38 @@ SERVICIOS_MOCK = [
         "tiene_interprete_lsc": True,
         "distancia_aproximada": 2.9
     },
+    {
+        "id": "s17",
+        "nombre": "Secretaría de Inclusión Social",
+        "categoria": "Gobierno",
+        "subcategoria": "Secretaría Municipal",
+        "direccion": "Carrera 55 #42-180, Medellín",
+        "telefono": "+57 604 3859000",
+        "whatsapp": "+57 3105678901",
+        "zona": "Centro",
+        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC permanente", "Material en braille"],
+        "horarios": "Lunes a Viernes 8:00 - 17:00",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 3.1
+    },
+    {
+        "id": "s18",
+        "nombre": "Comisaría de Familia Norte",
+        "categoria": "Gobierno",
+        "subcategoria": "Comisaría",
+        "direccion": "Calle 98 #52-30, Medellín",
+        "telefono": "+57 604 5123789",
+        "whatsapp": "+57 3134567890",
+        "zona": "Norte",
+        "caracteristicas_accesibilidad": ["Rampas", "Atención con intérprete LSC", "Señalización clara"],
+        "horarios": "Lunes a Viernes 8:00 - 18:00",
+        "tiene_interprete_lsc": True,
+        "distancia_aproximada": 5.5
+    },
 
-    # --- Otros Servicios Variados ---
+    # ========================================================================
+    # OTROS SERVICIOS (2 servicios: Comercio y Cultura)
+    # ========================================================================
     {
         "id": "s9",
         "nombre": "Centro Comercial Santafé Medellín",
@@ -156,8 +277,9 @@ SERVICIOS_MOCK = [
     }
 ]
 
-# INTERPRETES_MOCK: Datos de intérpretes LSC para el MVP
-# CAMBIO: Se eliminó el campo 'tarifa_hora' de todos los intérpretes
+# ============================================================================
+# INTÉRPRETES LSC (7 intérpretes)
+# ============================================================================
 INTERPRETES_MOCK = [
     {
         "id": "i1",
@@ -210,5 +332,44 @@ INTERPRETES_MOCK = [
         "telefono": "+57 3156789123",
         "whatsapp": "+57 3156789123",
         "email": "andres.gomez@example.com"
+    },
+    {
+        "id": "i5",
+        "nombre": "Daniela Moreno Ríos",
+        "foto": None,
+        "especialidades": ["Médica", "Educativa"],
+        "zonas_cobertura": ["Sur", "Occidente"],
+        "disponibilidad": "Lunes a Viernes 9:00 - 18:00, Sábado 9:00 - 13:00",
+        "años_experiencia": 6,
+        "certificaciones": ["Certificación Nacional LSC Nivel II", "Especialización en Salud"],
+        "telefono": "+57 3187654321",
+        "whatsapp": "+57 3187654321",
+        "email": "daniela.moreno@example.com"
+    },
+    {
+        "id": "i6",
+        "nombre": "Santiago Velásquez",
+        "foto": None,
+        "especialidades": ["Empresarial", "Eventos", "Legal"],
+        "zonas_cobertura": ["Centro", "Norte", "Sur"],
+        "disponibilidad": "Lunes a Domingo disponibilidad inmediata",
+        "años_experiencia": 10,
+        "certificaciones": ["Certificación Avanzada LSC", "Certificado Internacional en Interpretación"],
+        "telefono": "+57 3209876543",
+        "whatsapp": "+57 3209876543",
+        "email": "santiago.velasquez@example.com"
+    },
+    {
+        "id": "i7",
+        "nombre": "Camila Zapata Henao",
+        "foto": None,
+        "especialidades": ["Educativa", "Eventos"],
+        "zonas_cobertura": ["Oriente", "Centro"],
+        "disponibilidad": "Lunes a Viernes 7:00 - 15:00",
+        "años_experiencia": 2,
+        "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
+        "telefono": "+57 3143216789",
+        "whatsapp": "+57 3143216789",
+        "email": "camila.zapata@example.com"
     }
 ]
