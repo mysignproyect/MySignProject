@@ -26,21 +26,21 @@ from data.mock_data import SERVICIOS_MOCK
 class NodoCategoria:
     """
     Nodo del árbol de categorías.
-    
+
     Cada nodo puede contener:
     - Subcategorías (nodos hijos)
     - Lista de servicios asociados
-    
+
     Estructura de datos: Árbol n-ario (cada nodo puede tener múltiples hijos)
     """
 
     def __init__(self, nombre: str):
         """
         Inicializa un nodo de categoría.
-        
+
         Args:
             nombre: Nombre de la categoría o subcategoría
-        
+
         Complejidad: O(1)
         """
         self.nombre: str = nombre
@@ -50,10 +50,10 @@ class NodoCategoria:
     def add_subcategoria(self, nombre: str) -> "NodoCategoria":
         """
         Agrega o retorna una subcategoría.
-        
+
         Si la subcategoría ya existe, retorna el nodo existente.
         Si no existe, crea un nuevo nodo hijo.
-        
+
         Complejidad: O(1) - Acceso a dict por clave
         """
         if nombre not in self.subcategorias:
@@ -63,7 +63,7 @@ class NodoCategoria:
     def add_servicio(self, servicio: dict):
         """
         Agrega un servicio a este nodo.
-        
+
         Complejidad: O(1) - Append a lista
         """
         self.servicios.append(servicio)
@@ -72,12 +72,12 @@ class NodoCategoria:
 class ArbolCategorias:
     """
     Árbol jerárquico de categorías de servicios.
-    
+
     Organiza servicios en una estructura de árbol con 3 niveles:
     1. Raíz (invisible al usuario)
     2. Categorías principales (Salud, Educación, Gobierno)
     3. Subcategorías (Hospitales, Clínicas, Colegios, etc.)
-    
+
     Justificación del árbol:
         - Representa naturalmente jerarquías (categoría → subcategoría)
         - Permite navegación intuitiva nivel por nivel
@@ -88,7 +88,7 @@ class ArbolCategorias:
     def __init__(self):
         """
         Inicializa el árbol con la estructura predefinida de categorías.
-        
+
         Complejidad: O(1) - Solo crea nodos de categorías (no carga servicios aún)
         """
         self.raiz = NodoCategoria("Raíz")
@@ -113,22 +113,22 @@ class ArbolCategorias:
     ) -> List[dict]:
         """
         Busca servicios en el árbol por categoría y opcionalmente subcategoría.
-        
+
         Usa RECURSIÓN para recorrer el árbol hasta encontrar el nodo deseado.
-        
+
         Args:
             categoria: Categoría principal (ej: "Salud", "Educación")
             subcategoria: Subcategoría específica (opcional, ej: "Hospitales")
-        
+
         Returns:
             Lista de servicios que coinciden con los criterios
-        
+
         Complejidad: O(h + k) donde:
             h = altura del árbol (en este caso, constante pequeña = 2)
             k = servicios encontrados
-        
+
         Estructura: Árbol con recorrido recursivo en profundidad (DFS)
-        
+
         Justificación de recursión:
             La recursión es natural para recorrer árboles ya que:
             - El código es más legible que iteración con pilas
@@ -140,7 +140,7 @@ class ArbolCategorias:
         def buscar_recursivo(nodo: NodoCategoria):
             """
             Función recursiva interna para recorrer el árbol.
-            
+
             Caso base: Si encontramos la categoría buscada
             Caso recursivo: Seguir buscando en subcategorías
             """
@@ -168,24 +168,24 @@ class ArbolCategorias:
     def obtener_todas_categorias(self) -> List[str]:
         """
         Retorna las categorías principales (hijos directos de la raíz).
-        
+
         Returns:
             Lista con nombres: ["Salud", "Educación", "Gobierno"]
-        
+
         Complejidad: O(1) - Solo accede al primer nivel del árbol
         """
         return list(self.raiz.subcategorias.keys())
-    
+
     def obtener_subcategorias(self, categoria: str) -> List[str]:
         """
         Obtiene subcategorías de una categoría principal.
-        
+
         Args:
             categoria: Nombre de categoría principal
-        
+
         Returns:
             Lista de nombres de subcategorías, o lista vacía si no existe
-        
+
         Complejidad: O(1) - Acceso directo al nodo en el árbol
         """
         if categoria in self.raiz.subcategorias:
@@ -196,16 +196,16 @@ class ArbolCategorias:
     def cargar_servicios(self, servicios: List[dict]):
         """
         Carga servicios en el árbol según su categoría y subcategoría.
-        
+
         Cada servicio se coloca en el nodo correspondiente de la jerarquía.
         Si la categoría no existe, se crea dinámicamente.
-        
+
         Args:
             servicios: Lista de diccionarios con información de servicios
-        
+
         Complejidad: O(n) donde n = número de servicios
             Cada servicio se inserta en O(1) en el nodo correspondiente
-        
+
         Justificación:
             Aunque cargar servicios es O(n), las búsquedas posteriores
             son O(h) gracias a la estructura del árbol, donde h es la altura
@@ -234,12 +234,12 @@ class ArbolCategorias:
 def inicializar_arbol_con_mock() -> ArbolCategorias:
     """
     Factory function: Crea árbol precargado con datos mock.
-    
+
     Utilizada para testing y desarrollo local.
-    
+
     Returns:
         Instancia de ArbolCategorias con servicios mock cargados
-    
+
     Complejidad: O(n) donde n = servicios en SERVICIOS_MOCK
     """
     arbol = ArbolCategorias()
@@ -250,11 +250,11 @@ def inicializar_arbol_con_mock() -> ArbolCategorias:
 if __name__ == "__main__":
     """Script de verificación rápida del árbol de categorías"""
     arbol = inicializar_arbol_con_mock()
-    
+
     print("=" * 60)
     print("MY SIGN - ÁRBOL DE CATEGORÍAS")
     print("=" * 60)
-    
+
     # Mostrar estructura del árbol
     print("Categorías disponibles:")
     categorias = arbol.obtener_todas_categorias()
@@ -264,17 +264,17 @@ if __name__ == "__main__":
         for sub in subcats:
             print(f"    ├── {sub}")
     print()
-    
+
     # Pruebas de búsqueda
     print("Prueba 1: Todos los servicios de Salud")
     servicios_salud = arbol.buscar_servicios_categoria("Salud")
     print(f"  → Encontrados: {len(servicios_salud)} servicios")
     print()
-    
+
     print("Prueba 2: Solo Hospitales")
     hospitales = arbol.buscar_servicios_categoria("Salud", "Hospitales")
     print(f"  → Encontrados: {len(hospitales)} hospitales")
     for h in hospitales:
         print(f"    • {h['nombre']}")
-    
+
     print("=" * 60)

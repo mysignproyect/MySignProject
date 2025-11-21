@@ -20,10 +20,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 4441333",
         "whatsapp": None,
         "zona": "Norte",
-        "caracteristicas_accesibilidad": ["Rampas", "Señalización en Braille", "Ascensores amplios"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Señalización en Braille",
+            "Ascensores amplios",
+        ],
         "horarios": "Lunes a Domingo 24 horas",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 2.5
+        "distancia_aproximada": 2.5,
     },
     {
         "id": "s2",
@@ -34,10 +38,13 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3421010",
         "whatsapp": "+57 3101234567",
         "zona": "Occidente",
-        "caracteristicas_accesibilidad": ["Rampas", "Personal capacitado en atención a personas sordas"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Personal capacitado en atención a personas sordas",
+        ],
         "horarios": "Lunes a Domingo 24 horas",
         "tiene_interprete_lsc": False,
-        "distancia_aproximada": 5.1
+        "distancia_aproximada": 5.1,
     },
     {
         "id": "s3",
@@ -48,10 +55,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3846000",
         "whatsapp": None,
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Baños accesibles", "Ascensores con voz"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Baños accesibles",
+            "Ascensores con voz",
+        ],
         "horarios": "Lunes a Domingo 24 horas",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 3.2
+        "distancia_aproximada": 3.2,
     },
     {
         "id": "s11",
@@ -62,10 +73,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 4459000",
         "whatsapp": "+57 3207654321",
         "zona": "Norte",
-        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC 24/7", "Tecnología asistiva"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Intérprete LSC 24/7",
+            "Tecnología asistiva",
+        ],
         "horarios": "Lunes a Domingo 24 horas",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 4.2
+        "distancia_aproximada": 4.2,
     },
     {
         "id": "s12",
@@ -79,7 +94,7 @@ SERVICIOS_MOCK = [
         "caracteristicas_accesibilidad": ["Rampas", "Señalización visual clara"],
         "horarios": "Lunes a Viernes 7:00 - 17:00",
         "tiene_interprete_lsc": False,
-        "distancia_aproximada": 5.8
+        "distancia_aproximada": 5.8,
     },
     {
         "id": "s13",
@@ -90,12 +105,15 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3053500",
         "whatsapp": "+57 3009876543",
         "zona": "Sur",
-        "caracteristicas_accesibilidad": ["Rampas", "Personal bilingüe", "Atención prioritaria"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Personal bilingüe",
+            "Atención prioritaria",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 19:00, Sábado 8:00 - 14:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 6.3
+        "distancia_aproximada": 6.3,
     },
-
     # ========================================================================
     # SERVICIOS DE EDUCACIÓN (6 servicios)
     # ========================================================================
@@ -108,10 +126,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2198332",
         "whatsapp": None,
         "zona": "Norte",
-        "caracteristicas_accesibilidad": ["Rampas", "Interpretación LSC en eventos", "Señalización táctil"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Interpretación LSC en eventos",
+            "Señalización táctil",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 18:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 2.0
+        "distancia_aproximada": 2.0,
     },
     {
         "id": "s5",
@@ -122,10 +144,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2619500",
         "whatsapp": None,
         "zona": "Sur",
-        "caracteristicas_accesibilidad": ["Rampas", "Baños accesibles", "Material digital accesible"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Baños accesibles",
+            "Material digital accesible",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 19:00",
         "tiene_interprete_lsc": False,
-        "distancia_aproximada": 7.8
+        "distancia_aproximada": 7.8,
     },
     {
         "id": "s6",
@@ -136,10 +162,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2665150",
         "whatsapp": None,
         "zona": "Sur",
-        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC disponible", "Carteles inclusivos"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Intérprete LSC disponible",
+            "Carteles inclusivos",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 16:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 6.5
+        "distancia_aproximada": 6.5,
     },
     {
         "id": "s14",
@@ -150,10 +180,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 4488388",
         "whatsapp": "+57 3123456789",
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Ascensores", "Interpretación LSC bajo solicitud"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Ascensores",
+            "Interpretación LSC bajo solicitud",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 21:00, Sábado 8:00 - 13:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 3.5
+        "distancia_aproximada": 3.5,
     },
     {
         "id": "s15",
@@ -164,10 +198,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 4600727",
         "whatsapp": None,
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Señalización inclusiva", "Aulas adaptadas"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Señalización inclusiva",
+            "Aulas adaptadas",
+        ],
         "horarios": "Lunes a Viernes 6:00 - 22:00, Sábado 7:00 - 17:00",
         "tiene_interprete_lsc": False,
-        "distancia_aproximada": 2.7
+        "distancia_aproximada": 2.7,
     },
     {
         "id": "s16",
@@ -178,12 +216,15 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2509090",
         "whatsapp": "+57 3176543210",
         "zona": "Occidente",
-        "caracteristicas_accesibilidad": ["Rampas", "Programa de inclusión", "Personal capacitado"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Programa de inclusión",
+            "Personal capacitado",
+        ],
         "horarios": "Lunes a Viernes 7:00 - 15:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 7.2
+        "distancia_aproximada": 7.2,
     },
-
     # ========================================================================
     # SERVICIOS DE GOBIERNO (4 servicios)
     # ========================================================================
@@ -196,10 +237,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3855555",
         "whatsapp": "+57 3001239876",
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Atención prioritaria", "Puntos accesibles de información"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Atención prioritaria",
+            "Puntos accesibles de información",
+        ],
         "horarios": "Lunes a Viernes 8:00 - 17:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 2.8
+        "distancia_aproximada": 2.8,
     },
     {
         "id": "s8",
@@ -210,10 +255,13 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3859970",
         "whatsapp": None,
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC disponible bajo solicitud"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Intérprete LSC disponible bajo solicitud",
+        ],
         "horarios": "Lunes a Viernes 8:00 - 17:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 2.9
+        "distancia_aproximada": 2.9,
     },
     {
         "id": "s17",
@@ -224,10 +272,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 3859000",
         "whatsapp": "+57 3105678901",
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Intérprete LSC permanente", "Material en braille"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Intérprete LSC permanente",
+            "Material en braille",
+        ],
         "horarios": "Lunes a Viernes 8:00 - 17:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 3.1
+        "distancia_aproximada": 3.1,
     },
     {
         "id": "s18",
@@ -238,12 +290,15 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 5123789",
         "whatsapp": "+57 3134567890",
         "zona": "Norte",
-        "caracteristicas_accesibilidad": ["Rampas", "Atención con intérprete LSC", "Señalización clara"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Atención con intérprete LSC",
+            "Señalización clara",
+        ],
         "horarios": "Lunes a Viernes 8:00 - 18:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 5.5
+        "distancia_aproximada": 5.5,
     },
-
     # ========================================================================
     # OTROS SERVICIOS (2 servicios: Comercio y Cultura)
     # ========================================================================
@@ -256,10 +311,14 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2669999",
         "whatsapp": None,
         "zona": "Sur",
-        "caracteristicas_accesibilidad": ["Rampas", "Señalización visual", "Personal capacitado en inclusión"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Señalización visual",
+            "Personal capacitado en inclusión",
+        ],
         "horarios": "Lunes a Domingo 10:00 - 21:00",
         "tiene_interprete_lsc": False,
-        "distancia_aproximada": 8.2
+        "distancia_aproximada": 8.2,
     },
     {
         "id": "s10",
@@ -270,11 +329,15 @@ SERVICIOS_MOCK = [
         "telefono": "+57 604 2513636",
         "whatsapp": "+57 3204567890",
         "zona": "Centro",
-        "caracteristicas_accesibilidad": ["Rampas", "Recorridos con intérprete LSC", "Audioguías"],
+        "caracteristicas_accesibilidad": [
+            "Rampas",
+            "Recorridos con intérprete LSC",
+            "Audioguías",
+        ],
         "horarios": "Martes a Domingo 10:00 - 17:00",
         "tiene_interprete_lsc": True,
-        "distancia_aproximada": 3.0
-    }
+        "distancia_aproximada": 3.0,
+    },
 ]
 
 # ============================================================================
@@ -292,7 +355,7 @@ INTERPRETES_MOCK = [
         "certificaciones": ["Certificación Nacional de Intérprete LSC Nivel II"],
         "telefono": "+57 3104567890",
         "whatsapp": "+57 3104567890",
-        "email": "laura.perez@example.com"
+        "email": "laura.perez@example.com",
     },
     {
         "id": "i2",
@@ -305,7 +368,7 @@ INTERPRETES_MOCK = [
         "certificaciones": ["Certificado de Competencia en Interpretación Educativa"],
         "telefono": "+57 3129876543",
         "whatsapp": "+57 3129876543",
-        "email": "carlos.restrepo@example.com"
+        "email": "carlos.restrepo@example.com",
     },
     {
         "id": "i3",
@@ -318,7 +381,7 @@ INTERPRETES_MOCK = [
         "certificaciones": ["Certificado Avanzado en Interpretación Legal"],
         "telefono": "+57 3145678912",
         "whatsapp": "+57 3145678912",
-        "email": "maria.torres@example.com"
+        "email": "maria.torres@example.com",
     },
     {
         "id": "i4",
@@ -331,7 +394,7 @@ INTERPRETES_MOCK = [
         "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
         "telefono": "+57 3156789123",
         "whatsapp": "+57 3156789123",
-        "email": "andres.gomez@example.com"
+        "email": "andres.gomez@example.com",
     },
     {
         "id": "i5",
@@ -341,10 +404,13 @@ INTERPRETES_MOCK = [
         "zonas_cobertura": ["Sur", "Occidente"],
         "disponibilidad": "Lunes a Viernes 9:00 - 18:00, Sábado 9:00 - 13:00",
         "años_experiencia": 6,
-        "certificaciones": ["Certificación Nacional LSC Nivel II", "Especialización en Salud"],
+        "certificaciones": [
+            "Certificación Nacional LSC Nivel II",
+            "Especialización en Salud",
+        ],
         "telefono": "+57 3187654321",
         "whatsapp": "+57 3187654321",
-        "email": "daniela.moreno@example.com"
+        "email": "daniela.moreno@example.com",
     },
     {
         "id": "i6",
@@ -354,10 +420,13 @@ INTERPRETES_MOCK = [
         "zonas_cobertura": ["Centro", "Norte", "Sur"],
         "disponibilidad": "Lunes a Domingo disponibilidad inmediata",
         "años_experiencia": 10,
-        "certificaciones": ["Certificación Avanzada LSC", "Certificado Internacional en Interpretación"],
+        "certificaciones": [
+            "Certificación Avanzada LSC",
+            "Certificado Internacional en Interpretación",
+        ],
         "telefono": "+57 3209876543",
         "whatsapp": "+57 3209876543",
-        "email": "santiago.velasquez@example.com"
+        "email": "santiago.velasquez@example.com",
     },
     {
         "id": "i7",
@@ -370,6 +439,6 @@ INTERPRETES_MOCK = [
         "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
         "telefono": "+57 3143216789",
         "whatsapp": "+57 3143216789",
-        "email": "camila.zapata@example.com"
-    }
+        "email": "camila.zapata@example.com",
+    },
 ]

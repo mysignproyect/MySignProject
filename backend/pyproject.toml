@@ -1,0 +1,33 @@
+# Configuración de herramientas de desarrollo para My Sign Backend
+
+[tool.black]
+# Longitud de línea (88 es el default recomendado por Black)
+line-length = 88
+
+# Versión de Python objetivo
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+# Archivos y directorios a incluir
+include = '\.pyi?$'
+
+# Archivos y directorios a excluir
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | __pycache__
+  | \.pytest_cache
+  | \.mypy_cache
+  | build
+  | dist
+)/
+'''
+
+[tool.pylint.messages_control]
+# Configuración adicional de Pylint (complementa .pylintrc)
+disable = [
+    "C0111",  # missing-docstring
+    "C0103",  # invalid-name
+    "R0903",  # too-few-public-methods
+]

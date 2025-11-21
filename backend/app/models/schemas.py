@@ -15,7 +15,7 @@ from typing import List, Literal, Optional, Dict
 class Servicio(BaseModel):
     """
     Modelo de datos para servicios accesibles (salud, educación, gobierno).
-    
+
     Representa instituciones y lugares que ofrecen servicios a la
     comunidad sorda de Medellín, con información sobre accesibilidad
     y disponibilidad de intérpretes LSC.
@@ -43,7 +43,8 @@ class Servicio(BaseModel):
 
     # Accesibilidad
     caracteristicas_accesibilidad: List[str] = Field(
-        ..., description="Lista de características de accesibilidad (rampas, ascensores, etc.)"
+        ...,
+        description="Lista de características de accesibilidad (rampas, ascensores, etc.)",
     )
     horarios: str = Field(..., description="Horarios de atención al público")
     tiene_interprete_lsc: bool = Field(
@@ -57,6 +58,7 @@ class Servicio(BaseModel):
 
     class Config:
         """Configuración de Pydantic para este modelo"""
+
         json_schema_extra = {
             "example": {
                 "id": "srv-001",
@@ -67,10 +69,14 @@ class Servicio(BaseModel):
                 "telefono": "6041234567",
                 "whatsapp": "3001234567",
                 "zona": "Centro",
-                "caracteristicas_accesibilidad": ["Rampas", "Ascensor", "Baños adaptados"],
+                "caracteristicas_accesibilidad": [
+                    "Rampas",
+                    "Ascensor",
+                    "Baños adaptados",
+                ],
                 "horarios": "Lunes a viernes 8:00-17:00",
                 "tiene_interprete_lsc": True,
-                "distancia_aproximada": 2.5
+                "distancia_aproximada": 2.5,
             }
         }
 
@@ -78,10 +84,10 @@ class Servicio(BaseModel):
 class Interprete(BaseModel):
     """
     Modelo de datos para Intérprete de Lengua de Señas Colombiana (LSC).
-    
+
     Representa profesionales certificados en interpretación LSC,
     con información sobre especialidades, cobertura geográfica y contacto.
-    
+
     Nota: No incluye tarifas para simplificar el MVP. El enfoque es
     conectar usuarios con intérpretes, no gestionar pagos.
     """
@@ -93,8 +99,8 @@ class Interprete(BaseModel):
 
     # Especialización y cobertura
     especialidades: List[str] = Field(
-        ..., 
-        description="Áreas de especialidad: Médica, Legal, Educativa, Empresarial, Eventos"
+        ...,
+        description="Áreas de especialidad: Médica, Legal, Educativa, Empresarial, Eventos",
     )
     zonas_cobertura: List[str] = Field(
         ..., description="Zonas geográficas donde ofrece servicios"
@@ -105,9 +111,9 @@ class Interprete(BaseModel):
 
     # Experiencia y certificación
     años_experiencia: int = Field(
-        ..., 
+        ...,
         alias="anios_experiencia",
-        description="Años de experiencia como intérprete LSC"
+        description="Años de experiencia como intérprete LSC",
     )
     certificaciones: List[str] = Field(
         ..., description="Certificaciones y cursos relevantes en interpretación LSC"
@@ -120,6 +126,7 @@ class Interprete(BaseModel):
 
     class Config:
         """Configuración de Pydantic para este modelo"""
+
         populate_by_name = True  # Permite usar 'años_experiencia' o 'anios_experiencia'
         json_schema_extra = {
             "example": {
@@ -130,10 +137,13 @@ class Interprete(BaseModel):
                 "zonas_cobertura": ["Centro", "Norte"],
                 "disponibilidad": "Lunes a viernes 9:00-18:00",
                 "anios_experiencia": 5,
-                "certificaciones": ["Certificado LSC Nivel 3", "Curso de ética profesional"],
+                "certificaciones": [
+                    "Certificado LSC Nivel 3",
+                    "Curso de ética profesional",
+                ],
                 "telefono": "6047654321",
                 "whatsapp": "3107654321",
-                "email": "laura.gomez@example.com"
+                "email": "laura.gomez@example.com",
             }
         }
 
@@ -141,40 +151,38 @@ class Interprete(BaseModel):
 class EstadisticasResponse(BaseModel):
     """
     Modelo de respuesta para el endpoint de estadísticas generales.
-    
+
     Proporciona un resumen cuantitativo de los recursos disponibles
     en el sistema: servicios, intérpretes, categorías y zonas.
-    
+
     Utilizado por el frontend para mostrar información general
     del sistema y métricas de disponibilidad.
     """
-    
+
     # Estadísticas de servicios
     total_servicios: int = Field(
         ..., description="Cantidad total de servicios disponibles"
     )
     servicios_por_categoria: Dict[str, int] = Field(
-        ...,
-        description="Diccionario con conteo de servicios por cada categoría"
+        ..., description="Diccionario con conteo de servicios por cada categoría"
     )
-    
+
     # Estadísticas de intérpretes
     total_interpretes: int = Field(
         ..., description="Cantidad total de intérpretes LSC disponibles"
     )
     interpretes_por_especialidad: Dict[str, int] = Field(
-        ...,
-        description="Diccionario con conteo de intérpretes por especialidad"
+        ..., description="Diccionario con conteo de intérpretes por especialidad"
     )
-    
+
     # Información geográfica
     zonas_disponibles: List[str] = Field(
-        ...,
-        description="Lista de zonas geográficas de Medellín cubiertas"
+        ..., description="Lista de zonas geográficas de Medellín cubiertas"
     )
-    
+
     class Config:
         """Configuración de Pydantic para este modelo"""
+
         json_schema_extra = {
             "example": {
                 "total_servicios": 18,
@@ -183,7 +191,7 @@ class EstadisticasResponse(BaseModel):
                     "Educación": 6,
                     "Gobierno": 4,
                     "Comercio": 1,
-                    "Cultura": 1
+                    "Cultura": 1,
                 },
                 "total_interpretes": 7,
                 "interpretes_por_especialidad": {
@@ -191,8 +199,8 @@ class EstadisticasResponse(BaseModel):
                     "Legal": 3,
                     "Educativa": 4,
                     "Empresarial": 3,
-                    "Eventos": 2
+                    "Eventos": 2,
                 },
-                "zonas_disponibles": ["Centro", "Norte", "Sur", "Oriente", "Occidente"]
+                "zonas_disponibles": ["Centro", "Norte", "Sur", "Oriente", "Occidente"],
             }
         }
