@@ -6,7 +6,6 @@ class TestPaginarResultados(unittest.TestCase):
     def setUp(self):
         self.items = list(range(1, 11))
 
-    
     def test_paginacion_basica(self):
         resultado = paginar_resultados(self.items, page=2, limit=3)
         self.assertEqual(resultado["data"], [4, 5, 6])
@@ -36,7 +35,6 @@ class TestPaginarResultados(unittest.TestCase):
         self.assertEqual(resultado["metadata"]["current_page"], 1)
         self.assertFalse(resultado["metadata"]["has_next"])
 
-
     def test_error_pagina_invalida(self):
         with self.assertRaises(ValueError):
             paginar_resultados(self.items, page=0, limit=5)
@@ -48,7 +46,6 @@ class TestPaginarResultados(unittest.TestCase):
     def test_error_limite_invalido_mayor(self):
         with self.assertRaises(ValueError):
             paginar_resultados(self.items, page=1, limit=100)
-
 
     def test_paginacion_unica_pagina(self):
         resultado = paginar_resultados(self.items, page=1, limit=20)

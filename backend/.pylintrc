@@ -1,0 +1,76 @@
+# Configuración de Pylint para My Sign Backend
+
+[MASTER]
+# Archivos o directorios a ignorar
+ignore=venv,__pycache__,.git,node_modules
+
+# Usar múltiples procesos para acelerar Pylint
+jobs=1
+
+# Cargar plugins de Pylint (deshabilitado por ahora)
+load-plugins=
+
+[MESSAGES CONTROL]
+# Deshabilitar mensajes específicos que son demasiado estrictos o no aplicables
+disable=
+    C0111,  # missing-docstring (ya tenemos docstrings donde importa)
+    C0103,  # invalid-name (permite nombres cortos como 'id', 'i', 'k')
+    R0903,  # too-few-public-methods (permite clases simples como modelos)
+    R0913,  # too-many-arguments (filtrar_servicios necesita varios args)
+    W0212,  # protected-access (permite acceso a _atributos en tests)
+    C0301,  # line-too-long (Black ya maneja esto)
+    C0330,  # bad-continuation (Black ya maneja esto)
+    W0511,  # fixme (permite TODOs en desarrollo)
+    R0801,  # duplicate-code (común en tests)
+
+[FORMAT]
+# Longitud máxima de línea (Black usa 88 por defecto)
+max-line-length=88
+
+# Número máximo de líneas en un módulo
+max-module-lines=1000
+
+# String usado para indentación (Black usa 4 espacios)
+indent-string='    '
+
+[BASIC]
+# Convenciones de nombres
+# Permite nombres de variables cortos comunes en programación
+good-names=i,j,k,e,ex,id,_,pk,x,y,z,f,n,m,s,q
+
+# Expresiones regulares para nombres válidos
+argument-rgx=[a-z_][a-z0-9_]{1,30}$
+variable-rgx=[a-z_][a-z0-9_]{1,30}$
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+attr-rgx=[a-z_][a-z0-9_]{1,30}$
+function-rgx=[a-z_][a-z0-9_]{2,40}$
+method-rgx=[a-z_][a-z0-9_]{2,40}$
+class-rgx=[A-Z_][a-zA-Z0-9]+$
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+
+[DESIGN]
+# Complejidad y límites de diseño
+max-args=7              # Máximo de argumentos por función
+max-locals=15           # Máximo de variables locales
+max-returns=6           # Máximo de return statements
+max-branches=12         # Máximo de ramas (if/elif)
+max-statements=50       # Máximo de statements por función
+max-attributes=10       # Máximo de atributos por clase
+min-public-methods=1    # Mínimo de métodos públicos (permite clases simples)
+max-public-methods=20   # Máximo de métodos públicos
+
+[IMPORTS]
+# Análisis de imports
+allow-wildcard-with-all=no
+
+[CLASSES]
+# Validar que las clases tengan métodos __init__ definidos cuando es necesario
+defining-attr-methods=__init__,__new__
+
+# Atributos válidos que pueden ser definidos fuera de __init__
+valid-classmethod-first-arg=cls
+valid-metaclass-classmethod-first-arg=mcs
+
+[EXCEPTIONS]
+# Nombres de excepciones que deben terminar con "Error"
+overgeneral-exceptions=Exception
