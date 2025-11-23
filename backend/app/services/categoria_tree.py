@@ -34,18 +34,53 @@ class NodoCategoria:
     Estructura de datos: Árbol n-ario (cada nodo puede tener múltiples hijos)
     """
 
-    def __init__(self, nombre: str):
+    def __init__(self, nombre: str, padre: Optional["NodoCategoria"] = None):
         """
         Inicializa un nodo de categoría.
-
-        Args:
-            nombre: Nombre de la categoría o subcategoría
-
-        Complejidad: O(1)
+        
+        NUEVO: Agrega referencia al padre para navegación bidireccional
         """
-        self.nombre: str = nombre
-        self.subcategorias: Dict[str, NodoCategoria] = {}
-        self.servicios: List[dict] = []
+        self._nombre: str = nombre
+        self._padre: Optional[NodoCategoria] = padre
+        self._subcategorias: Dict[str, NodoCategoria] = {}
+        self._servicios: List[dict] = []
+
+    @property
+    def nombre(self) -> str:
+        """Getter del nombre (solo lectura)"""
+        return self._nombre
+    
+    @property
+    def subcategorias(self) -> Dict[str, "NodoCategoria"]:
+        """Getter de subcategorías (solo lectura)"""
+        return self._subcategorias
+    
+    @property
+    def servicios(self) -> List[dict]:
+        """Getter de servicios (solo lectura)"""
+        return self._servicios
+    
+    @property
+    def es_raiz(self) -> bool:
+        """Verifica si es nodo raíz"""
+        return self._padre is None
+    
+    @property
+    def es_hoja(self) -> bool:
+        """Verifica si es nodo hoja"""
+        return len(self._subcategorias) == 0
+    
+    @property
+    def nivel(self) -> int:
+        """
+        Calcula el nivel del nodo en el árbol (recursivo).
+        
+        Returns:
+            0 para raíz, 1 para hijos directos, etc.
+        """
+        if self.es_raiz:
+            return 0
+        return 1 + self._padre.nivel
 
     def add_subcategoria(self, nombre: str) -> "NodoCategoria":
         """
@@ -56,9 +91,9 @@ class NodoCategoria:
 
         Complejidad: O(1) - Acceso a dict por clave
         """
-        if nombre not in self.subcategorias:
-            self.subcategorias[nombre] = NodoCategoria(nombre)
-        return self.subcategorias[nombre]
+        if nombre not in self._subcategorias:
+            self._subcategorias[nombre] = NodoCategoria(nombre, padre=self)
+        return self._subcategorias[nombre]
 
     def add_servicio(self, servicio: dict):
         """
@@ -66,7 +101,7 @@ class NodoCategoria:
 
         Complejidad: O(1) - Append a lista
         """
-        self.servicios.append(servicio)
+        self._servicios.append(servicio)
 
 
 class ArbolCategorias:
@@ -83,30 +118,40 @@ class ArbolCategorias:
         - Permite navegación intuitiva nivel por nivel
         - Facilita búsquedas recursivas por categoría
         - Estructura escalable para agregar más niveles si se requiere
+
+    REFACTORIZACIÓN POO:
+    - Campo raíz privado
+    - Property para acceso controlado
     """
 
     def __init__(self):
-        """
-        Inicializa el árbol con la estructura predefinida de categorías.
+        """Inicializa el árbol con estructura predefinida"""
+        self._raiz = NodoCategoria("Raíz")
+        self._construir_estructura()
 
-        Complejidad: O(1) - Solo crea nodos de categorías (no carga servicios aún)
+    def _construir_estructura(self) -> None:
         """
-        self.raiz = NodoCategoria("Raíz")
-
-        # Construcción de categoría Salud con sus subcategorías
-        salud = self.raiz.add_subcategoria("Salud")
+        Construye la estructura jerárquica.
+        
+        NUEVO: Método privado para construcción
+        """
+        salud = self._raiz.add_subcategoria("Salud")
         for sub in ["Hospitales", "Clínicas", "Centros de Salud"]:
             salud.add_subcategoria(sub)
-
-        # Construcción de categoría Educación
-        educacion = self.raiz.add_subcategoria("Educación")
+        
+        educacion = self._raiz.add_subcategoria("Educación")
         for sub in ["Colegios", "Universidades", "Institutos"]:
             educacion.add_subcategoria(sub)
-
-        # Construcción de categoría Gobierno
-        gobierno = self.raiz.add_subcategoria("Gobierno")
+        
+        gobierno = self._raiz.add_subcategoria("Gobierno")
         for sub in ["Alcaldías", "Entidades Públicas"]:
             gobierno.add_subcategoria(sub)
+    
+    @property
+    def raiz(self) -> NodoCategoria:
+        """Acceso de solo lectura a la raíz"""
+        return self._raiz
+    
 
     def buscar_servicios_categoria(
         self, categoria: str, subcategoria: Optional[str] = None

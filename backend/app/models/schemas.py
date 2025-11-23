@@ -8,7 +8,7 @@ de la API. Pydantic se encarga de:
 - Generación de documentación OpenAPI
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import List, Literal, Optional, Dict
 
 
@@ -21,40 +21,67 @@ class Servicio(BaseModel):
     y disponibilidad de intérpretes LSC.
     """
 
-    # Identificación
     id: str = Field(..., description="Identificador único del servicio")
     nombre: str = Field(..., description="Nombre del servicio o institución")
-
-    # Clasificación
-    categoria: Literal["Salud", "Educación", "Gobierno"] = Field(
-        ..., description="Categoría principal del servicio"
-    )
-    subcategoria: str = Field(
-        ..., description="Tipo específico (ej: Hospital, Clínica, Universidad)"
-    )
-
-    # Ubicación y contacto
-    direccion: str = Field(..., description="Dirección completa del servicio")
-    telefono: str = Field(..., description="Número de teléfono de contacto")
-    whatsapp: Optional[str] = Field(None, description="Número de WhatsApp (opcional)")
-    zona: Literal["Centro", "Norte", "Sur", "Oriente", "Occidente"] = Field(
-        ..., description="Zona geográfica de Medellín"
-    )
-
-    # Accesibilidad
-    caracteristicas_accesibilidad: List[str] = Field(
-        ...,
-        description="Lista de características de accesibilidad (rampas, ascensores, etc.)",
-    )
-    horarios: str = Field(..., description="Horarios de atención al público")
-    tiene_interprete_lsc: bool = Field(
-        ..., description="Indica si hay intérprete LSC disponible"
-    )
-
-    # Información adicional
-    distancia_aproximada: Optional[float] = Field(
-        None, description="Distancia estimada al usuario en kilómetros (opcional)"
-    )
+    categoria: Literal["Salud", "Educación", "Gobierno"]
+    subcategoria: str
+    direccion: str
+    telefono: str
+    whatsapp: Optional[str] = None
+    zona: Literal["Centro", "Norte", "Sur", "Oriente", "Occidente"]
+    caracteristicas_accesibilidad: List[str]
+    horarios: str
+    tiene_interprete_lsc: bool
+    distancia_aproximada: Optional[float] = None
+    
+    @field_validator('telefono', 'whatsapp')
+    @classmethod
+    def validar_telefono(cls, v: Optional[str]) -> Optional[str]:
+        """Valida formato de teléfono"""
+        if v and not v.isdigit():
+            raise ValueError('El teléfono debe contener solo números')
+        return v
+    
+    def tiene_caracteristica(self, caracteristica: str) -> bool:
+        """
+        Verifica si el servicio tiene una característica específica.
+        
+        Complejidad: O(n) donde n = características
+        """
+        return any(
+            caracteristica.lower() in c.lower() 
+            for c in self.caracteristicas_accesibilidad
+        )
+    
+    def coincide_con_texto(self, texto: str) -> bool:
+        """
+        Verifica si el servicio coincide con un texto de búsqueda.
+        
+        Complejidad: O(n + m) donde n = campos, m = características
+        """
+        texto_lower = texto.lower()
+        return (
+            texto_lower in self.nombre.lower() or
+            texto_lower in self.direccion.lower() or
+            any(texto_lower in c.lower() for c in self.caracteristicas_accesibilidad)
+        )
+    
+    def obtener_contacto(self) -> Dict[str, str]:
+        """Retorna información de contacto del servicio"""
+        contacto = {
+            "telefono": self.telefono,
+            "direccion": self.direccion
+        }
+        if self.whatsapp:
+            contacto["whatsapp"] = self.whatsapp
+        return contacto
+    
+    def es_cercano(self, distancia_maxima: float = 5.0) -> bool:
+        """Verifica si el servicio está cerca según distancia"""
+        if self.distancia_aproximada is None:
+            return False
+        return self.distancia_aproximada <= distancia_maxima
+    
 
     class Config:
         """Configuración de Pydantic para este modelo"""
@@ -91,43 +118,58 @@ class Interprete(BaseModel):
     Nota: No incluye tarifas para simplificar el MVP. El enfoque es
     conectar usuarios con intérpretes, no gestionar pagos.
     """
-
-    # Identificación
-    id: str = Field(..., description="Identificador único del intérprete")
-    nombre: str = Field(..., description="Nombre completo del intérprete")
-    foto: Optional[str] = Field(None, description="URL de foto de perfil (opcional)")
-
-    # Especialización y cobertura
-    especialidades: List[str] = Field(
-        ...,
-        description="Áreas de especialidad: Médica, Legal, Educativa, Empresarial, Eventos",
-    )
-    zonas_cobertura: List[str] = Field(
-        ..., description="Zonas geográficas donde ofrece servicios"
-    )
-    disponibilidad: str = Field(
-        ..., description="Horario general de disponibilidad del intérprete"
-    )
-
-    # Experiencia y certificación
-    años_experiencia: int = Field(
-        ...,
-        alias="anios_experiencia",
-        description="Años de experiencia como intérprete LSC",
-    )
-    certificaciones: List[str] = Field(
-        ..., description="Certificaciones y cursos relevantes en interpretación LSC"
-    )
-
-    # Contacto
-    telefono: str = Field(..., description="Teléfono de contacto")
-    whatsapp: str = Field(..., description="Número de WhatsApp (obligatorio)")
-    email: str = Field(..., description="Correo electrónico")
+    id: str
+    nombre: str
+    foto: Optional[str] = None
+    especialidades: List[str]
+    zonas_cobertura: List[str]
+    disponibilidad: str
+    años_experiencia: int = Field(..., alias="anios_experiencia")
+    certificaciones: List[str]
+    telefono: str
+    whatsapp: str
+    email: str
+    
+    @field_validator('email')
+    @classmethod
+    def validar_email(cls, v: str) -> str:
+        """Validación básica de email"""
+        if '@' not in v:
+            raise ValueError('Email inválido')
+        return v
+    
+    @field_validator('años_experiencia')
+    @classmethod
+    def validar_experiencia(cls, v: int) -> int:
+        """Valida años de experiencia"""
+        if v < 0:
+            raise ValueError('Los años de experiencia no pueden ser negativos')
+        return v
+    
+    def tiene_especialidad(self, especialidad: str) -> bool:
+        """Verifica si tiene una especialidad específica"""
+        return especialidad in self.especialidades
+    
+    def cubre_zona(self, zona: str) -> bool:
+        """Verifica si cubre una zona específica"""
+        return zona in self.zonas_cobertura
+    
+    def es_experimentado(self, años_minimos: int = 5) -> bool:
+        """Verifica si es un intérprete experimentado"""
+        return self.años_experiencia >= años_minimos
+    
+    def obtener_contacto(self) -> Dict[str, str]:
+        """Retorna información de contacto"""
+        return {
+            "telefono": self.telefono,
+            "whatsapp": self.whatsapp,
+            "email": self.email
+        }
 
     class Config:
         """Configuración de Pydantic para este modelo"""
 
-        populate_by_name = True  # Permite usar 'años_experiencia' o 'anios_experiencia'
+        populate_by_name = True 
         json_schema_extra = {
             "example": {
                 "id": "int-001",
