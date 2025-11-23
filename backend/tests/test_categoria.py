@@ -1,4 +1,3 @@
-
 import unittest
 import copy
 from data.mock_data import SERVICIOS_MOCK
@@ -58,7 +57,6 @@ class TestArbolCategorias(unittest.TestCase):
         sub_cultura = self.arbol.obtener_subcategorias("Cultura")
         self.assertIsInstance(sub_cultura, list)
 
-
     def test_obtener_subcategorias_inexistente(self):
         sub_inexistente = self.arbol.obtener_subcategorias("Inexistente")
         self.assertEqual(sub_inexistente, [])
@@ -82,11 +80,11 @@ class TestArbolCategorias(unittest.TestCase):
     def test_buscar_categoria_inexistente(self):
         resultado = self.arbol.buscar_servicios_categoria("Inexistente")
         self.assertEqual(resultado, [])
-    
+
     def test_buscar_categoria_sin_subcategoria(self):
         resultado = self.arbol.buscar_servicios_categoria("Educación")
         self.assertIsInstance(resultado, list)
-    
+
     def test_cargar_servicios_en_subcategoria_existente(self):
         servicio = {
             "id": "s1",
@@ -127,11 +125,12 @@ class TestArbolCategorias(unittest.TestCase):
         self.arbol.cargar_servicios([servicio])
 
         categorias = self.arbol.obtener_todas_categorias()
-        self.assertIn("Cultura", categorias, "La categoría nueva no fue creada automáticamente.")
+        self.assertIn(
+            "Cultura", categorias, "La categoría nueva no fue creada automáticamente."
+        )
 
         resultado = self.arbol.buscar_servicios_categoria("Cultura")
         self.assertTrue(any(s["id"] == "s3" for s in resultado))
-
 
 
 if __name__ == "__main__":

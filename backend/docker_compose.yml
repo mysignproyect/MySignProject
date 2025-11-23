@@ -1,0 +1,74 @@
+# docker-compose.yml para My Sign Project
+# Orquesta backend (FastAPI) y frontend (React/Vite)
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # BACKEND - FastAPI
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mysign-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Montar código para desarrollo (hot-reload)
+      - ./backend/app:/app/app
+      - ./backend/data:/app/data
+    environment:
+      - ENVIRONMENT=development
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - mysign-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # # ===========================================================================
+  # # FRONTEND - React + Vite
+  # # ===========================================================================
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: mysign-frontend
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     # Montar código para desarrollo (hot-reload)
+  #     - ./frontend/src:/app/src
+  #     - ./frontend/public:/app/public
+  #     # Excluir node_modules del volumen
+  #     - /app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #     - VITE_API_URL=http://localhost:8000
+  #   depends_on:
+  #     - backend
+  #   restart: unless-stopped
+  #   networks:
+  #     - mysign-network
+  #   stdin_open: true
+  #   tty: true
+
+# =============================================================================
+# NETWORKS
+# =============================================================================
+networks:
+  mysign-network:
+    driver: bridge
+    name: mysign-network
+
+# =============================================================================
+# VOLUMES (para persistencia futura si se requiere)
+# =============================================================================
+volumes:
+  mysign-data:
+    name: mysign-data

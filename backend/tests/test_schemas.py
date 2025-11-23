@@ -2,6 +2,7 @@ import pytest
 from pydantic import ValidationError
 from app.models.schemas import *
 
+
 def test_servicio_valido():
     servicio = Servicio(
         id="srv-001",
@@ -15,7 +16,7 @@ def test_servicio_valido():
         caracteristicas_accesibilidad=["Rampas", "Ascensor"],
         horarios="Lunes a viernes 8:00-17:00",
         tiene_interprete_lsc=True,
-        distancia_aproximada=2.5
+        distancia_aproximada=2.5,
     )
     assert servicio.categoria == "Salud"
     assert servicio.tiene_interprete_lsc is True
@@ -33,7 +34,7 @@ def test_servicio_categoria_invalida():
             zona="Norte",
             caracteristicas_accesibilidad=[],
             horarios="8:00-17:00",
-            tiene_interprete_lsc=False
+            tiene_interprete_lsc=False,
         )
 
 
@@ -50,7 +51,7 @@ def test_servicio_zona_invalida():
             zona="Desconocida",
             caracteristicas_accesibilidad=[],
             horarios="8:00-17:00",
-            tiene_interprete_lsc=False
+            tiene_interprete_lsc=False,
         )
 
 
@@ -66,7 +67,7 @@ def test_servicio_opcional_sin_whatsapp():
         zona="Norte",
         caracteristicas_accesibilidad=["Rampas"],
         horarios="8:00-17:00",
-        tiene_interprete_lsc=False
+        tiene_interprete_lsc=False,
     )
     assert servicio.whatsapp is None
 
@@ -82,7 +83,7 @@ def test_interprete_valido():
         certificaciones=["Certificado LSC Nivel 3"],
         telefono="6047654321",
         whatsapp="3107654321",
-        email="laura@example.com"
+        email="laura@example.com",
     )
     assert interprete.años_experiencia == 5
 
@@ -98,8 +99,9 @@ def test_interprete_falta_campo_obligatorio():
             anios_experiencia=3,
             certificaciones=["Certificado LSC Nivel 2"],
             whatsapp="3110000000",
-            email="carlos@example.com"
+            email="carlos@example.com",
         )
+
 
 def test_estadisticas_response_valido():
     data = EstadisticasResponse(
@@ -107,7 +109,7 @@ def test_estadisticas_response_valido():
         servicios_por_categoria={"Salud": 3, "Educación": 2},
         total_interpretes=4,
         interpretes_por_especialidad={"Médica": 2, "Educativa": 2},
-        zonas_disponibles=["Centro", "Norte"]
+        zonas_disponibles=["Centro", "Norte"],
     )
     assert data.total_servicios == 10
     assert "Salud" in data.servicios_por_categoria
@@ -120,5 +122,5 @@ def test_estadisticas_response_error_tipo():
             servicios_por_categoria={"Salud": 3},
             total_interpretes=4,
             interpretes_por_especialidad={"Médica": 2},
-            zonas_disponibles=["Centro"]
+            zonas_disponibles=["Centro"],
         )
