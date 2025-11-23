@@ -1,6 +1,7 @@
 import unittest
 from app.services.buscador import crear_buscador_desde_mock
 
+
 class TestBuscadorServicios(unittest.TestCase):
 
     @classmethod
@@ -34,7 +35,9 @@ class TestBuscadorServicios(unittest.TestCase):
         self.assertFalse(zona)
 
     def test_filtrar_servicios_con_interprete(self):
-        filtrados = self.buscador.filtrar_servicios(categoria="Salud", tiene_interprete=True)
+        filtrados = self.buscador.filtrar_servicios(
+            categoria="Salud", tiene_interprete=True
+        )
         self.assertTrue(all(s["tiene_interprete_lsc"] for s in filtrados))
 
     def test_buscar_interprete_por_id(self):
@@ -47,17 +50,22 @@ class TestBuscadorServicios(unittest.TestCase):
         self.assertGreaterEqual(len(medicos), 1)
         self.assertTrue(all("Médica" in i["especialidades"] for i in medicos))
 
-
     def test_buscar_interpretes_por_especialidad_inexistente(self):
         interpretes = self.buscador.buscar_interpretes_por_especialidad("Inexistente")
         self.assertEqual(len(interpretes), 0)
 
     def test_filtrar_servicios_por_subcategoria(self):
-        resultado = self.buscador.filtrar_servicios(categoria="Salud", subcategoria="Hospital General")
-        self.assertGreater(len(resultado), 0, "No se encontraron servicios en la subcategoría 'Hospital General'.")
+        resultado = self.buscador.filtrar_servicios(
+            categoria="Salud", subcategoria="Hospital General"
+        )
+        self.assertGreater(
+            len(resultado),
+            0,
+            "No se encontraron servicios en la subcategoría 'Hospital General'.",
+        )
         self.assertTrue(
             all(s["subcategoria"] == "Hospital General" for s in resultado),
-            "Se encontraron servicios que no pertenecen a la subcategoría 'Hospital General'."
+            "Se encontraron servicios que no pertenecen a la subcategoría 'Hospital General'.",
         )
 
 

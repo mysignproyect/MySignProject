@@ -1,0 +1,56 @@
+#container_servicios {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#servicio_numero_uno, #servicio_numero_dos {
+    width: 45%;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+}
+
+#img_servicio_uno img, #img_servicio_dos img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+#info_servicio_uno, #info_servicio_dos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#info_servicio_uno h2, #info_servicio_dos h2 {
+    text-align: center;
+    margin: 10px;
+}
+
+#info_servicio_uno p, #info_servicio_dos p {
+    margin: 20px;
+    width: 70%;
+    text-align: center;
+}
+
+#info_servicio_button_link {
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#info_servicio_button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#info_servicio_button:hover {
+    background-color: #0056b3;
+}

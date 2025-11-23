@@ -124,7 +124,6 @@ docker --version
     ```
 
 2. **Backend (FastAPI)**
-    - Ver detalles en [backend/README.md](backend/README.md)
     ```bash
     cd backend
     python -m venv venv
@@ -137,10 +136,18 @@ docker --version
     ```
 
 3. **Frontend (React)**
-    - Ver detalles en [frontend/README.md](frontend/README.md)
     ```bash
     cd frontend
     npm install
+    ```
+   
+4. **Tests**
+    ```bash
+    pip install pytest-html
+   general:    pytest
+   individual: 
+   pytest backend/tests --html=reports/backend_report.html --self-contained-html
+   pytest frontend/tests --html=reports/frontend_report.html --self-contained-html
     ```
 
 ---

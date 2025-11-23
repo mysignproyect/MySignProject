@@ -1,0 +1,67 @@
+# .dockerignore para My Sign Backend
+# Excluye archivos innecesarios del contexto de Docker
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.cover
+.hypothesis/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentación de desarrollo
+*.md
+!README.md
+
+# Logs
+*.log
+logs/
+
+# Base de datos (si hubiera)
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuraciones locales
+.env
+.env.local
+*.local
+
+# Reports
+reports/
+*.html
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
