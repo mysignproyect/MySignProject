@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../assets/css/Nav.css";
+import "../assets/css/Gif.css";
 import logo_nom from "../assets/img/nombre_proyecto.JPG";
 import titulo_gif from "../assets/gif/titulo.gif";
 import { Link } from "react-router-dom";

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "../assets/css/InterpretesYServicios.css";
-import "../assets/css/Gif.css";
 import tituloGif from '../assets/gif/titulo.gif';
 import Gif from '../assets/gif/perro.gif';
 
-export default function ListadoInterpretes() {
-    const [especialidades, setEspecialidades] = useState("");
+
+export default function ListadoEntidades() {
+    const [categoria, setCategoria] = useState("");
     const [zona, setZona] = useState("");
+    const [accesibilidad, setAccesibilidad] = useState("");
 
     const [gifState, setGifState] = useState({
         visible: false,
@@ -16,31 +17,37 @@ export default function ListadoInterpretes() {
     });
 
     const entidades = [
-        {id: 1, nombre: "Alcaldía de Medellín", descripcion: "Entidad gubernamental local.", especialidades:"gobierno", zona:"centro"},
-        {id: 2, nombre: "Gobernación de Antioquia", descripcion: "Administración departamental.", especialidades:"gobierno", zona:"centro"},
-        {id: 3, nombre: "Secretaría de Inclusión Social", descripcion: "Programas para la comunidad.", especialidades:"gobierno", zona:"sur"},
-        {id: 4, nombre: "Metro de Medellín", descripcion: "Sistema de transporte público accesible.", especialidades:"transporte", zona:"centro"},
-        {id: 5, nombre: "Hospital General", descripcion: "Servicios de salud con accesibilidad.", especialidades:"salud", zona:"norte"},
-        {id: 6, nombre: "Universidad de Antioquia", descripcion: "Institución de educación superior.", especialidades:"educacion", zona:"occidente"},
+        {id: 1, nombre: "Alcaldía de Medellín", descripcion: "Entidad gubernamental local.", categoria:"gobierno", zona:"centro", accesibilidad:"rampa"},
+        {id: 2, nombre: "Gobernación de Antioquia", descripcion: "Administración departamental.", categoria:"gobierno", zona:"centro", accesibilidad:"interpretes"},
+        {id: 3, nombre: "Secretaría de Inclusión Social", descripcion: "Programas para la comunidad.", categoria:"gobierno", zona:"sur", accesibilidad:"braille"},
+        {id: 4, nombre: "Metro de Medellín", descripcion: "Sistema de transporte público accesible.", categoria:"transporte", zona:"centro", accesibilidad:"todos"},
+        {id: 5, nombre: "Hospital General", descripcion: "Servicios de salud con accesibilidad.", categoria:"salud", zona:"norte", accesibilidad:"rampa"},
+        {id: 6, nombre: "Universidad de Antioquia", descripcion: "Institución de educación superior.", categoria:"educacion", zona:"occidente", accesibilidad:"interpretes"},
     ]; 
 
     const entidadesFiltradas = entidades.filter((e) =>
-        (especialidades ? e.especialidades === especialidades : true) &&
-        (zona ? e.zona === zona : true)
+        (categoria ? e.categoria === categoria : true) &&
+        (zona ? e.zona === zona : true) &&
+        (accesibilidad ? e.accesibilidad === accesibilidad : true)
     ); 
-
     const gifUrls = {
         Especialidades: tituloGif,
         Zona: Gif,
-        gobierno: tituloGif,
-        transporte: Gif,
-        salud: tituloGif,
-        educacion: Gif,
+        Accesibilidad: tituloGif,
+        Médica: tituloGif,
+        Legal: Gif,
+        Educativa: tituloGif,
+        Empresarial: Gif,
+        Eventos: Gif,
         Centro: tituloGif,
         Norte: Gif,
         Sur: tituloGif,
         Oriente: Gif, 
-        Occidente: Gif
+        Occidente: Gif,
+        rampa: tituloGif,
+        interpretes: Gif,
+        braille: tituloGif,
+        todos: Gif
     };
 
     const handleMouseEnter = (e, key) => {
@@ -60,25 +67,28 @@ export default function ListadoInterpretes() {
         setGifState({ ...gifState, visible: false });
     };
     
+
     return (
         <>
           <div className="entidades_interpretes_container">
               <section className="hero_interpretes_entidades">
                   <div className="hero-texto">
 
-                     <div className="filtros">
-                         <select 
-                            value={especialidades} 
-                            onChange={(e)=>setEspecialidades(e.target.value)}
-                            onMouseEnter={(e) => handleMouseEnter(e, especialidades || 'Especialidades')} 
+                      <div className="filtros">
+                          <select 
+                            value={categoria} 
+                            onChange={(e)=>setCategoria(e.target.value)}
+                            onMouseEnter={(e) => handleMouseEnter(e, categoria || 'Especialidades')} 
                             onMouseLeave={handleMouseLeave}
                           >
                               <option value="Especialidades">Especialidades</option>
-                              <option value="gobierno">Gobierno</option> 
-                              <option value="transporte">Transporte</option>
-                              <option value="salud">Salud</option>
-                              <option value="educacion">Educación</option>
+                              <option value="Médica">Médica</option>
+                              <option value="Legal">Legal</option>
+                              <option value="Educativa">Educativa</option>
+                              <option value="Empresarial">Empresarial</option>
+                              <option value="Eventos">Eventos</option>
                           </select>
+
 
                           <select 
                             value={zona} 
@@ -90,13 +100,27 @@ export default function ListadoInterpretes() {
                               <option value="Centro">Centro</option>
                               <option value="Norte">Norte</option>
                               <option value="Sur">Sur</option>
-                              <option value="Oriente">Oriente</option> 
+                              <option value="Oriente">Oriente</option>
                               <option value="Occidente">Occidente</option>
                           </select>
+
+                           <select 
+                           value={accesibilidad} 
+                                onChange={(e)=>setAccesibilidad(e.target.value)}
+                                onMouseEnter={(e) => handleMouseEnter(e, accesibilidad || 'rampa')}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                <option value="Accesibilidad">Accesibilidad</option>
+                                <option value="rampa">Rampa</option>
+                                <option value="interpretes">Intérpretes</option>
+                                <option value="braille">Señalética Braille</option>
+                                <option value="todos">Total Accesibilidad</option>
+                            </select>
+
                       </div>
                   </div>
               </section>
-              
+
               {gifState.visible && gifState.src && (
                   <div 
                       className="gif-container" 
@@ -111,7 +135,7 @@ export default function ListadoInterpretes() {
               )}
 
               <section className="lista_interpretes_entidades">
-                  <h2 className="titulo-lista">Lista de Interpretes</h2>
+                  <h2 className="titulo-lista">Lista de entidades</h2>
 
                   <div className="grid_interpretes_entidades">
                       {entidadesFiltradas.length > 0 ? (
@@ -120,11 +144,15 @@ export default function ListadoInterpretes() {
                                   <h3>{entidad.nombre}</h3>
                                   <p>
                                       <span role="img" aria-label="Especialidad">🏷️</span>
-                                      Especialidad: {entidad.especialidades.charAt(0).toUpperCase() + entidad.especialidades.slice(1)}
+                                      Categoría: {entidad.categoria.charAt(0).toUpperCase() + entidad.categoria.slice(1)}
                                   </p>
                                   <p>
                                       <span role="img" aria-label="Zona">📍</span>
                                       Zona: {entidad.zona.charAt(0).toUpperCase() + entidad.zona.slice(1)}
+                                  </p>
+                                  <p>
+                                      <span role="img" aria-label="Accesibilidad">♿</span>
+                                      Accesibilidad: {entidad.accesibilidad}
                                   </p>
                                   <p>{entidad.descripcion}</p>
                               </div>
