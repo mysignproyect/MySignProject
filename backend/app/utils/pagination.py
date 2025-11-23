@@ -10,9 +10,83 @@ from math import ceil
 
 T = TypeVar("T")
 
+class MetadataPaginacion:
+    """
+    Metadata de una respuesta paginada.
+    
+    REFACTORIZACIÓN POO: Encapsular metadata en clase
+    """
+    total_items: int
+    total_pages: int
+    current_page: int
+    page_size: int
+    has_next: bool
+    has_previous: bool
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convierte a diccionario"""
+        return {
+            "total_items": self.total_items,
+            "total_pages": self.total_pages,
+            "current_page": self.current_page,
+            "page_size": self.page_size,
+            "has_next": self.has_next,
+            "has_previous": self.has_previous
+        }
+
+class Paginador:
+    """
+    Motor de paginación.
+    
+    REFACTORIZACIÓN POO: Encapsular lógica en clase
+    """
+    
+    @staticmethod
+    def paginar(
+        items: List[T],
+        page: int,
+        limit: int
+    ) -> Dict[str, Any]:
+        """
+        Pagina una lista de items.
+        
+        NOTA: Este método mantiene la misma firma que la función original
+        """
+        if page < 1:
+            raise ValueError("El número de página debe ser mayor o igual a 1")
+        if limit < 1 or limit > 50:
+            raise ValueError("El límite debe estar entre 1 y 50")
+        
+        total_items = len(items)
+        total_pages = ceil(total_items / limit) if total_items > 0 else 1
+        
+        if page > total_pages and total_pages > 0:
+            page = total_pages
+        
+        start_index = (page - 1) * limit
+        end_index = start_index + limit
+        
+        data_paginada = items[start_index:end_index]
+        
+        metadata = MetadataPaginacion(
+            total_items=total_items,
+            total_pages=total_pages,
+            current_page=page,
+            page_size=len(data_paginada),
+            has_next=page < total_pages,
+            has_previous=page > 1
+        )
+        
+        return {
+            "data": data_paginada,
+            "metadata": metadata.to_dict()
+        }
+    
 
 def paginar_resultados(
-    items: List[T], page: int = 1, limit: int = 10
+   items: List[T],
+    page: int = 1,
+    limit: int = 10
 ) -> Dict[str, Any]:
     """
     Pagina una lista de items y retorna datos con metadata de paginación.
@@ -59,41 +133,7 @@ def paginar_resultados(
         Se limita el tamaño de página a 50 para evitar cargas excesivas
         y garantizar tiempos de respuesta predecibles.
     """
-    # Validación: página debe ser positiva
-    if page < 1:
-        raise ValueError("El número de página debe ser mayor o igual a 1")
-
-    # Validación: límite debe estar en rango aceptable
-    if limit < 1 or limit > 50:
-        raise ValueError("El límite debe estar entre 1 y 50")
-
-    # Cálculos de paginación - O(1)
-    total_items = len(items)
-    total_pages = ceil(total_items / limit) if total_items > 0 else 1
-
-    # Ajustar página si excede el total disponible
-    if page > total_pages and total_pages > 0:
-        page = total_pages
-
-    # Calcular índices para el slice - O(1)
-    start_index = (page - 1) * limit
-    end_index = start_index + limit
-
-    # Obtener datos paginados usando slice - O(k) donde k = limit
-    # El slice de Python es eficiente, solo copia los elementos necesarios
-    data_paginada = items[start_index:end_index]
-
-    # Construir metadata de paginación - O(1)
-    metadata = {
-        "total_items": total_items,
-        "total_pages": total_pages,
-        "current_page": page,
-        "page_size": len(data_paginada),  # Puede ser menor que limit en última página
-        "has_next": page < total_pages,
-        "has_previous": page > 1,
-    }
-
-    return {"data": data_paginada, "metadata": metadata}
+    return Paginador.paginar(items, page, limit)
 
 
 if __name__ == "__main__":
