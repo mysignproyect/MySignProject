@@ -34,29 +34,28 @@ services:
   # # ===========================================================================
   # # FRONTEND - React + Vite
   # # ===========================================================================
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   container_name: mysign-frontend
-  #   ports:
-  #     - "5173:5173"
-  #   volumes:
-  #     # Montar código para desarrollo (hot-reload)
-  #     - ./frontend/src:/app/src
-  #     - ./frontend/public:/app/public
-  #     # Excluir node_modules del volumen
-  #     - /app/node_modules
-  #   environment:
-  #     - NODE_ENV=development
-  #     - VITE_API_URL=http://localhost:8000
-  #   depends_on:
-  #     - backend
-  #   restart: unless-stopped
-  #   networks:
-  #     - mysign-network
-  #   stdin_open: true
-  #   tty: true
+  frontend:
+  build:
+    context: ./frontend
+    dockerfile: Dockerfile
+  container_name: mysign-frontend
+  ports:
+    - "5173:5173"
+  volumes:
+    - ./frontend/src:/app/src
+    - ./frontend/public:/app/public
+    - /app/node_modules
+  environment:
+    - NODE_ENV=development
+    - VITE_API_URL=http://backend:8000/api
+  depends_on:
+    - backend
+  restart: unless-stopped
+  networks:
+    - mysign-network
+  stdin_open: true
+  tty: true
+
 
 # =============================================================================
 # NETWORKS
