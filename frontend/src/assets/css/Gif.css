@@ -33,15 +33,6 @@
     flex-direction: column;
 }
 
-.interprete, .entidades{
-    position: relative;
-    flex-direction: column;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
-    animation: slideDown 0.3s ease-out;
-}
 
 .hover-gif {
     width: 150px;
