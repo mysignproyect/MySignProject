@@ -42,7 +42,8 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
-        "https://mysign-frontend.onrender.com",  # cuando despliegues el frontend en Render
+        "https://mysign-frontend.onrender.com",# cuando despliegues el frontend en Render
+        "https://my-sign-project.vercel.app", #despliege de front en vercel
     ],
     allow_credentials=True,
     allow_methods=["*"],   # todos los métodos HTTP
