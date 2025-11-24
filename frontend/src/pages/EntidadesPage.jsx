@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import "../assets/css/InicioPage.css";
 import Entidades from "../components/ListadoEntidades";
 import Footer from "../components/FooterDeLaPagina";
-import img_SN from "../assets/img/imagenSobreNosotros.jpeg";
+import gif_Entidades from "../assets/gif/Entidades.gif";
 
 export default function EntidadesPage() {
     return (
@@ -16,7 +16,7 @@ export default function EntidadesPage() {
                         Encuentra datos actualizados, horarios y opciones de atención inclusiva.</p>
                     </section>
                     <article id="img_nosotros">
-                        <img src={img_SN} alt="Imagen sobre nosotros" id="Img" />
+                        <img src={gif_Entidades} alt="Imagen sobre nosotros" id="Img" />
                     </article>
                 </div>
                 <Entidades />

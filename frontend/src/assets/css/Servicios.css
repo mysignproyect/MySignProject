@@ -13,8 +13,9 @@
 }
 
 #img_servicio_uno img, #img_servicio_dos img {
-    width: 100%;
-    height: auto;
+    width: 80%;
+    height: 300px;
+    margin: 0px 30px;
     border-radius: 10px;
 }
 

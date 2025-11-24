@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../assets/css/Nav.css";
 import "../assets/css/Gif.css";
-import titulo_gif from "../assets/gif/titulo.gif";
+import titulo_gif from "../assets/gif/My_Sign.gif";
 import { Link } from "react-router-dom";
 
 export default function Nav() {
@@ -14,7 +14,6 @@ export default function Nav() {
             <Link to="/" id="info_servicio_button_link">
               <span id="nav_info_name">MY SIGN</span>
             </Link>
-            <img id="nav_info_img"/> 
             {showGif && (
               <div className="gif-container">
                 <img 

@@ -1,10 +1,15 @@
 import Nav from "../components/Nav";
 import "../assets/css/InicioPage.css";
 import Servicios from "../components/Servicios";
+import "../assets/css/Gif.css";
 import Footer from "../components/FooterDeLaPagina";
-import img_SN from "../assets/img/imagenSobreNosotros.jpeg";
+import gif_SN from "../assets/gif/Quien_somos.gif";
+import gif_Servicios from "../assets/gif/Servicios.gif";
+import { useState } from "react";
 
 export default function InicioPage() {
+ const [search, setSearch] = useState("");
+ const [showServiciosGif, setShowServiciosGif] = useState(false);
   return (
     <>
       <Nav />
@@ -17,10 +22,26 @@ export default function InicioPage() {
                 y un sistema de emergencias inclusivo.</p>
             </section>
             <article id="img_nosotros">
-              <img src={img_SN} alt="Imagen sobre nosotros" id="Img" />
+              <img src={gif_SN} alt="Imagen sobre nosotros" id="Img" />
             </article>
         </div>
-        <h1 id="titulo_servicios">Servicios</h1>
+        
+        <h1 
+          onMouseEnter={() => setShowServiciosGif(true)} 
+          onMouseLeave={() => setShowServiciosGif(false)}
+          id="titulo_servicios"
+        >
+          Servicios
+        </h1>
+        {showServiciosGif && (
+          <div className="gif-container servicios">
+            <img 
+              src={gif_Servicios} 
+              className="hover-gif"
+            />
+          </div>
+        )} 
+    
         <Servicios />
       </main>
       <Footer />
