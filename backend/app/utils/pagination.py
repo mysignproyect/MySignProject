@@ -16,15 +16,15 @@ class MetadataPaginacion:
     
     REFACTORIZACIÓN POO: Encapsular metadata en clase
     """
-    total_items: int
-    total_pages: int
-    current_page: int
-    page_size: int
-    has_next: bool
-    has_previous: bool
-    
+    def __init__(self, total_items, total_pages, current_page, page_size, has_next, has_previous):
+        self.total_items = total_items
+        self.total_pages = total_pages
+        self.current_page = current_page
+        self.page_size = page_size
+        self.has_next = has_next
+        self.has_previous = has_previous
+
     def to_dict(self) -> Dict[str, Any]:
-        """Convierte a diccionario"""
         return {
             "total_items": self.total_items,
             "total_pages": self.total_pages,
