@@ -29,32 +29,33 @@ export default function CardInterpretes({ fetchFunction, onVolver, mostrarVolver
           ← Volver
         </button>
       )}
-        <div className="Interprete_card_general">
-            {cargando ? (
-              <p>Cargando intérpretes...</p>
-            ) : interpretes.length > 0 ? (
-              interpretes.map((int) => (
-
-                <div key={int.id} className="interprete_card">
-                    <img
-                    src={int.foto || "https://via.placeholder.com/200x200.png?text=Sin+Foto"}
-                    alt={int.nombre}
-                    />
-                    <ul>
-                    <li><strong>{int.nombre}</strong></li>
-                    <li>Especialidad: {int.especialidades?.join(", ")}</li>
-                    <li>Zonas: {int.zonas_cobertura?.join(", ")}</li>
-                    <li>Disponibilidad: {int.disponibilidad}</li>
-                    <li>Tel: {int.telefono}</li>
-                    <li>Correo: {int.email}</li>
-                    </ul>
-                </div>
-                  
-              ))
-            ) : (
-              <p>No hay intérpretes disponibles.</p>
-            )}
-        </div>
+      <div className="Interprete_card_general">
+        {cargando ? (
+          <p>Cargando intérpretes...</p>
+        ) : interpretes.length > 0 ? (
+          interpretes.map((int) => (
+            <div key={int.id} className="interprete_card">
+              <img
+                src={int.foto || "https://via.placeholder.com/200x200.png?text=Sin+Foto"}
+                alt={int.nombre}
+              />
+              <ul>
+                <li><strong>{int.nombre}</strong></li>
+                <li>Especialidades: {int.especialidades?.join(", ")}</li>
+                <li>Zonas: {int.zonas_cobertura?.join(", ")}</li>
+                <li>Disponibilidad: {int.disponibilidad}</li>
+                <li>Años de experiencia: {int.anios_experiencia}</li>
+                <li>Certificaciones: {int.certificaciones?.join(", ")}</li>
+                <li>Tel: {int.telefono}</li>
+                <li>WhatsApp: {int.whatsapp || "No disponible"}</li>
+                <li>Correo: {int.email}</li>
+              </ul>
+            </div>
+          ))
+        ) : (
+          <p>No hay intérpretes disponibles.</p>
+        )}
+      </div>
     </div>
   );
 }

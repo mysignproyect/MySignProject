@@ -1,5 +1,5 @@
 import Nav from "../components/Nav";
-import "../assets/css/InicioPage.css";
+import "../assets/css/InterpretesYServicios.css";
 import ListadoInterpretes from "../components/ListadoInterpretes";
 import Footer from "../components/FooterDeLaPagina";
 import img_SN from "../assets/img/imagenSobreNosotros.jpeg";
