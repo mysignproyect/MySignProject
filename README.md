@@ -55,11 +55,10 @@ frontend/
 │   ├── assets/
 │   │   ├── css/
 │   │   ├── gif/
-│   │   └── img/
 │   ├── components/
-│   │   ├── CardInterpretes.jsx
 │   │   ├── FooterDeLaPagina.jsx
 │   │   ├── ListadoInterpretes.jsx
+│   │   ├── ListadoEntidades.jsx
 │   │   ├── Nav.jsx
 │   │   └── Servicios.jsx
 │   ├── pages/
@@ -147,7 +146,7 @@ Al abrir la aplicación:
 
 ### 4. Pruebas y reportes
 
-- Ejecuta las pruebas desde el backend o frontend y revisa los reportes HTML generados automáticamente.
+- Ejecuta las pruebas desde el backend y revisa los reportes HTML generados automáticamente.
 - Ideal para profesores o nuevos desarrolladores que deseen comprobar calidad y confiabilidad del código.
 
 ### 5. Ejecución rápida (ver sección ["Instalación y Ejecución Rápida"](#instalación-y-ejecución-rápida))
@@ -177,26 +176,6 @@ Al abrir la aplicación:
 - *Testing automático:*  
   - Cubre árbol, filtros, búsquedas por texto/zona/categoría, paginación.
   - Unitarias en /backend/app/tests/ cubren casos exitosos, bordes y fallos esperados.
-
----
-
-## Pruebas Automatizadas y Reportes
-
-*Cobertura plena, claridad para cualquier usuario:*
-- Pruebas backend (Pytest + HTML):  
-```
-  bash
-  cd backend
-  pytest app/tests/ --html=reports/backend_report.html --self-contained-html
-  ```
-- Pruebas frontend:
-```
-  bash
-  cd frontend
-  npm run test
-  ```
-- Consulta reportes en /frontend/reports/ y /backend/reports/ para resultados visuales y detallados.
-
 ---
 
 ## Integración y Uso de IA
@@ -290,17 +269,9 @@ y todo quedará corriendo automáticamente.
 ```
 bash
 cd backend
-pytest app/tests/ --html=report.html --self-contained-html
-
+Desde la raíz del proyecto se ejecuta el siguiente comando: pytest
+```
 Revisa el archivo generado report.html para ver resultados completos de las pruebas.
-```
-#### Frontend
-```
-bash
-cd frontend
-npm run test
-```
-Reporte disponible en /frontend/reports/.
 
 ---
 ## Recursos de Apoyo y Enlaces
@@ -315,6 +286,7 @@ Reporte disponible en /frontend/reports/.
 - Celene Parra Vega
 - Juan Esteban Acevedo Patiño
 - Daniela Pérez Agualimpia
+- Comunidad sorda casa de la cultura la estrella
 
 ---
 
