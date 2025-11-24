@@ -12,7 +12,7 @@ export default function Nav() {
     <nav id="nav">
         <div id="nav_info"onMouseEnter={() => setShowGif(true)} onMouseLeave={() => setShowGif(false)}>
             <Link to="/" id="info_servicio_button_link">
-               <span id="nav_info_name">MY SIGN</span>
+              <span id="nav_info_name">MY SIGN</span>
             </Link>
             <img id="nav_info_img"/> 
             {showGif && (
