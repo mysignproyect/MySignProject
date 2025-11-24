@@ -79,7 +79,7 @@ class TestArbolCategorias(unittest.TestCase):
     def test_validar_existencia_de_las_categorias(self):
         """Verifica que las categorías principales estén presentes en el árbol."""
         categorias = self.arbol.obtener_todas_categorias()
-        esperadas = ["Salud", "Educación", "Gobierno", "Comercio", "Cultura"]
+        esperadas = ["Salud", "Educación", "Gobierno"]
         self.assertCountEqual(categorias, esperadas)
 
     def test_obtener_subcategorias(self):

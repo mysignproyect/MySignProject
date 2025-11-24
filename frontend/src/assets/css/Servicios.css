@@ -13,8 +13,9 @@
 }
 
 #img_servicio_uno img, #img_servicio_dos img {
-    width: 100%;
-    height: auto;
+    width: 80%;
+    height: 300px;
+    margin: 0px 30px;
     border-radius: 10px;
 }
 
@@ -42,9 +43,8 @@
 
 #info_servicio_button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background-color: yellow;
+    border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -52,5 +52,5 @@
 }
 
 #info_servicio_button:hover {
-    background-color: #0056b3;
+    background-color: yellow;
 }

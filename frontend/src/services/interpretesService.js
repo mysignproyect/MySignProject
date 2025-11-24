@@ -1,16 +1,7 @@
-const API_URL = "http://127.0.0.1:8000/api/interpretes";
+import API_BASE_URL from "../config/api";
 
 export async function getInterpretes() {
-  const res = await fetch(API_URL);
-  return await res.json();
-}
-
-export async function getPorZona(zona) {
-  const res = await fetch(`${API_URL}/zona/${zona}`);
-  return await res.json();
-}
-
-export async function getPorEspecialidad(especialidad) {
-  const res = await fetch(`${API_URL}/especialidad/${especialidad}`);
-  return await res.json();
+  const response = await fetch(`${API_BASE_URL}/interpretes`);
+  if (!response.ok) throw new Error("Error al obtener intérpretes");
+  return response.json();
 }

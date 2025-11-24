@@ -1,8 +1,9 @@
 import Nav from "../components/Nav";
-import "../assets/css/InicioPage.css";
+import "../assets/css/InterpretesYServicios.css";
 import ListadoInterpretes from "../components/ListadoInterpretes";
 import Footer from "../components/FooterDeLaPagina";
-import img_SN from "../assets/img/imagenSobreNosotros.jpeg";
+import gif_Interpretes from "../assets/gif/interpretes.gif";
+
 
 export default function Interpretes() {
   return (
@@ -16,7 +17,7 @@ export default function Interpretes() {
                 Accede a perfiles, experiencia y contacto directo.</p>
             </section>
             <article id="img_nosotros">
-              <img src={img_SN} alt="Imagen sobre nosotros" id="Img" />
+              <img src={gif_Interpretes} alt="Imagen sobre nosotros" id="Img" />
             </article>
         </div>
         <ListadoInterpretes />

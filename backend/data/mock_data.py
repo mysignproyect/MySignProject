@@ -17,7 +17,7 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Hospital General",
         "direccion": "Carrera 51D #62-29, Medellín",
-        "telefono": "+57 604 4441333",
+        "telefono": "6044441333",
         "whatsapp": None,
         "zona": "Norte",
         "caracteristicas_accesibilidad": [
@@ -35,8 +35,8 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Clínica Privada",
         "direccion": "Diagonal 75B #2A-80, Medellín",
-        "telefono": "+57 604 3421010",
-        "whatsapp": "+57 3101234567",
+        "telefono": "6043421010",
+        "whatsapp": "3101234567",
         "zona": "Occidente",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -52,7 +52,7 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Hospital Público",
         "direccion": "Calle 64 #52-59, Medellín",
-        "telefono": "+57 604 3846000",
+        "telefono": "6043846000",
         "whatsapp": None,
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
@@ -70,8 +70,8 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Hospital Privado",
         "direccion": "Calle 78B #69-240, Medellín",
-        "telefono": "+57 604 4459000",
-        "whatsapp": "+57 3207654321",
+        "telefono": "6044459000",
+        "whatsapp": "3207654321",
         "zona": "Norte",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -88,8 +88,8 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Centro de Salud",
         "direccion": "Carrera 37 #67-50, Medellín",
-        "telefono": "+57 604 5123456",
-        "whatsapp": "+57 3158765432",
+        "telefono": "6045123456",
+        "whatsapp": "3158765432",
         "zona": "Oriente",
         "caracteristicas_accesibilidad": ["Rampas", "Señalización visual clara"],
         "horarios": "Lunes a Viernes 7:00 - 17:00",
@@ -102,8 +102,8 @@ SERVICIOS_MOCK = [
         "categoria": "Salud",
         "subcategoria": "Clínica Universitaria",
         "direccion": "Calle 10A #22-04, Medellín",
-        "telefono": "+57 604 3053500",
-        "whatsapp": "+57 3009876543",
+        "telefono": "6043053500",
+        "whatsapp": "3009876543",
         "zona": "Sur",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -123,7 +123,7 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Universidad Pública",
         "direccion": "Calle 67 #53-108, Medellín",
-        "telefono": "+57 604 2198332",
+        "telefono": "6042198332",
         "whatsapp": None,
         "zona": "Norte",
         "caracteristicas_accesibilidad": [
@@ -141,7 +141,7 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Universidad Privada",
         "direccion": "Carrera 49 #7 Sur-50, Medellín",
-        "telefono": "+57 604 2619500",
+        "telefono": "6042619500",
         "whatsapp": None,
         "zona": "Sur",
         "caracteristicas_accesibilidad": [
@@ -159,7 +159,7 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Colegio Público",
         "direccion": "Carrera 48 #12-50, Medellín",
-        "telefono": "+57 604 2665150",
+        "telefono": "6042665150",
         "whatsapp": None,
         "zona": "Sur",
         "caracteristicas_accesibilidad": [
@@ -177,8 +177,8 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Universidad Privada",
         "direccion": "Circular 1 #70-01, Medellín",
-        "telefono": "+57 604 4488388",
-        "whatsapp": "+57 3123456789",
+        "telefono": "6044488388",
+        "whatsapp": "3123456789",
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -195,7 +195,7 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Instituto Técnico",
         "direccion": "Calle 54A #30-01, Medellín",
-        "telefono": "+57 604 4600727",
+        "telefono": "6044600727",
         "whatsapp": None,
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
@@ -213,8 +213,8 @@ SERVICIOS_MOCK = [
         "categoria": "Educación",
         "subcategoria": "Colegio Privado",
         "direccion": "Carrera 73 #32D-51, Medellín",
-        "telefono": "+57 604 2509090",
-        "whatsapp": "+57 3176543210",
+        "telefono": "6042509090",
+        "whatsapp": "3176543210",
         "zona": "Occidente",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -228,14 +228,14 @@ SERVICIOS_MOCK = [
     # ========================================================================
     # SERVICIOS DE GOBIERNO (4 servicios)
     # ========================================================================
-    {
+   {
         "id": "s7",
         "nombre": "Alcaldía de Medellín",
         "categoria": "Gobierno",
         "subcategoria": "Administración Municipal",
         "direccion": "Carrera 52 #71-120, Medellín",
-        "telefono": "+57 604 3855555",
-        "whatsapp": "+57 3001239876",
+        "telefono": "6043855555",
+        "whatsapp": "3001239876",
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -252,7 +252,7 @@ SERVICIOS_MOCK = [
         "categoria": "Gobierno",
         "subcategoria": "Defensoría del Ciudadano",
         "direccion": "Carrera 52 #71-123, Medellín",
-        "telefono": "+57 604 3859970",
+        "telefono": "6043859970",
         "whatsapp": None,
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
@@ -269,8 +269,8 @@ SERVICIOS_MOCK = [
         "categoria": "Gobierno",
         "subcategoria": "Secretaría Municipal",
         "direccion": "Carrera 55 #42-180, Medellín",
-        "telefono": "+57 604 3859000",
-        "whatsapp": "+57 3105678901",
+        "telefono": "6043859000",
+        "whatsapp": "3105678901",
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -287,8 +287,8 @@ SERVICIOS_MOCK = [
         "categoria": "Gobierno",
         "subcategoria": "Comisaría",
         "direccion": "Calle 98 #52-30, Medellín",
-        "telefono": "+57 604 5123789",
-        "whatsapp": "+57 3134567890",
+        "telefono": "6045123789",
+        "whatsapp": "3134567890",
         "zona": "Norte",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -305,10 +305,10 @@ SERVICIOS_MOCK = [
     {
         "id": "s9",
         "nombre": "Centro Comercial Santafé Medellín",
-        "categoria": "Comercio",
+        "categoria": "Gobierno",  # ⚠️ antes: "Comercio"
         "subcategoria": "Centro Comercial",
         "direccion": "Carrera 43A #7 Sur-170, Medellín",
-        "telefono": "+57 604 2669999",
+        "telefono": "6042669999",
         "whatsapp": None,
         "zona": "Sur",
         "caracteristicas_accesibilidad": [
@@ -323,11 +323,11 @@ SERVICIOS_MOCK = [
     {
         "id": "s10",
         "nombre": "Museo de Antioquia",
-        "categoria": "Cultura",
+        "categoria": "Educación",  # ⚠️ antes: "Cultura"
         "subcategoria": "Museo",
         "direccion": "Carrera 52 #52-43, Medellín",
-        "telefono": "+57 604 2513636",
-        "whatsapp": "+57 3204567890",
+        "telefono": "6042513636",
+        "whatsapp": "3204567890",
         "zona": "Centro",
         "caracteristicas_accesibilidad": [
             "Rampas",
@@ -351,10 +351,10 @@ INTERPRETES_MOCK = [
         "especialidades": ["Médica", "Legal"],
         "zonas_cobertura": ["Centro", "Norte"],
         "disponibilidad": "Lunes a Viernes 8:00 - 18:00",
-        "años_experiencia": 5,
+        "anios_experiencia": 5,
         "certificaciones": ["Certificación Nacional de Intérprete LSC Nivel II"],
-        "telefono": "+57 3104567890",
-        "whatsapp": "+57 3104567890",
+        "telefono": "3104567890",
+        "whatsapp": "3104567890",
         "email": "laura.perez@example.com",
     },
     {
@@ -364,10 +364,10 @@ INTERPRETES_MOCK = [
         "especialidades": ["Educativa", "Empresarial"],
         "zonas_cobertura": ["Sur", "Centro"],
         "disponibilidad": "Lunes a Sábado 7:00 - 19:00",
-        "años_experiencia": 3,
+        "anios_experiencia": 3,
         "certificaciones": ["Certificado de Competencia en Interpretación Educativa"],
-        "telefono": "+57 3129876543",
-        "whatsapp": "+57 3129876543",
+        "telefono": "3129876543",
+        "whatsapp": "3129876543",
         "email": "carlos.restrepo@example.com",
     },
     {
@@ -377,10 +377,10 @@ INTERPRETES_MOCK = [
         "especialidades": ["Legal", "Eventos"],
         "zonas_cobertura": ["Occidente", "Centro"],
         "disponibilidad": "Lunes a Domingo 8:00 - 20:00",
-        "años_experiencia": 8,
+        "anios_experiencia": 8,
         "certificaciones": ["Certificado Avanzado en Interpretación Legal"],
-        "telefono": "+57 3145678912",
-        "whatsapp": "+57 3145678912",
+        "telefono": "3145678912",
+        "whatsapp": "3145678912",
         "email": "maria.torres@example.com",
     },
     {
@@ -390,10 +390,10 @@ INTERPRETES_MOCK = [
         "especialidades": ["Educativa", "Médica", "Empresarial"],
         "zonas_cobertura": ["Norte", "Oriente"],
         "disponibilidad": "Lunes a Viernes 8:00 - 17:00",
-        "años_experiencia": 4,
+        "anios_experiencia": 4,
         "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
-        "telefono": "+57 3156789123",
-        "whatsapp": "+57 3156789123",
+        "telefono": "3156789123",
+        "whatsapp": "3156789123",
         "email": "andres.gomez@example.com",
     },
     {
@@ -403,13 +403,13 @@ INTERPRETES_MOCK = [
         "especialidades": ["Médica", "Educativa"],
         "zonas_cobertura": ["Sur", "Occidente"],
         "disponibilidad": "Lunes a Viernes 9:00 - 18:00, Sábado 9:00 - 13:00",
-        "años_experiencia": 6,
+        "anios_experiencia": 6,
         "certificaciones": [
             "Certificación Nacional LSC Nivel II",
             "Especialización en Salud",
         ],
-        "telefono": "+57 3187654321",
-        "whatsapp": "+57 3187654321",
+        "telefono": "3187654321",
+        "whatsapp": "3187654321",
         "email": "daniela.moreno@example.com",
     },
     {
@@ -419,13 +419,13 @@ INTERPRETES_MOCK = [
         "especialidades": ["Empresarial", "Eventos", "Legal"],
         "zonas_cobertura": ["Centro", "Norte", "Sur"],
         "disponibilidad": "Lunes a Domingo disponibilidad inmediata",
-        "años_experiencia": 10,
+        "anios_experiencia": 10,
         "certificaciones": [
             "Certificación Avanzada LSC",
             "Certificado Internacional en Interpretación",
         ],
-        "telefono": "+57 3209876543",
-        "whatsapp": "+57 3209876543",
+        "telefono": "3209876543",
+        "whatsapp": "3209876543",
         "email": "santiago.velasquez@example.com",
     },
     {
@@ -435,10 +435,10 @@ INTERPRETES_MOCK = [
         "especialidades": ["Educativa", "Eventos"],
         "zonas_cobertura": ["Oriente", "Centro"],
         "disponibilidad": "Lunes a Viernes 7:00 - 15:00",
-        "años_experiencia": 2,
+        "anios_experiencia": 2,
         "certificaciones": ["Certificación en Interpretación LSC Nivel I"],
-        "telefono": "+57 3143216789",
-        "whatsapp": "+57 3143216789",
+        "telefono": "3143216789",
+        "whatsapp": "3143216789",
         "email": "camila.zapata@example.com",
     },
 ]
