@@ -282,7 +282,7 @@ docker compose up --build
 ```
 y todo quedará corriendo automáticamente.
 
----
+----
 
 ### 5. Pruebas y reportes
 
