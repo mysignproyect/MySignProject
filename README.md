@@ -1,304 +1,301 @@
-# My Sign - Sistema de Servicios Accesibles para la Comunidad Sorda de Medellín
+# My Sign  
+*Sistema de Servicios Accesibles para la Comunidad Sorda de Medellín*
+
+---
+
+## Índice
+
+1. [Descripción General](#descripción-general)
+2. [¿Qué Problema Resuelve?](#qué-problema-resuelve)
+3. [Arquitectura y Estructura de Carpetas](#arquitectura-y-estructura-de-carpetas)
+    - [Frontend (React)](#frontend-react)
+    - [Backend (FastAPI)](#backend-fastapi)
+4. [Características Clave](#características-clave)
+5. [Manual de Usuario (Guía Paso a Paso)](#manual-de-usuario-guía-paso-a-paso)
+6. [Documentación Técnica y Justificación Estructuras de Datos](#documentación-técnica-y-justificación-estructuras-de-datos)
+7. [Pruebas Automatizadas y Reportes](#pruebas-automatizadas-y-reportes)
+8. [Integración y Uso de IA](#integración-y-uso-de-ia)
+9. [Instalación y Ejecución Rápida](#instalación-y-ejecución-rápida)
+10. [Recursos de Apoyo y Enlaces](#recursos-de-apoyo-y-enlaces)
+11. [Equipo](#equipo)
+12. [Créditos, Licencia y Contribuciones](#créditos-licencia-y-contribuciones)
+---
 
 ## Descripción General
 
-**My Sign** es una plataforma web que centraliza información sobre servicios accesibles, intérpretes de Lengua de Señas Colombiana (LSC) y un sistema de emergencias adaptado para la comunidad sorda de Medellín. El objetivo principal es facilitar el acceso a servicios esenciales y promover la inclusión digital, permitiendo búsquedas por categoría, ubicación y contacto ágil en situaciones de emergencia.
+*My Sign* es una aplicación web construida para la comunidad sorda de Medellín. Centraliza información sobre servicios accesibles y un directorio de intérpretes LSC (Lengua de Señas Colombiana). Desde un enfoque centrado en la inclusión, permite localizar intérpretes por zona o especialidad y acceder a instituciones aliadas (salud, educación, gobierno).  
+*[Prototipo Interactivo Figma](https://www.figma.com/design/wksq1JPGmSkbUH64O9Uewp/Untitled?node-id=0-1&t=tTwV1PWaw9cesa4M-0)*
 
 ---
 
-## Problema que Resuelve
+## ¿Qué Problema Resuelve?
 
-La comunidad sorda de Medellín enfrenta dificultades para acceder a servicios básicos debido a la falta de:
-- Información centralizada y confiable sobre servicios accesibles.
-- Directorios actualizados de intérpretes certificados en LSC.
-- Sistemas de emergencia que consideren sus necesidades comunicativas y tecnológicas.
+- Dificultad para encontrar servicios realmente accesibles.
+- Dispersión y poca confiabilidad en la información de intérpretes y entidades amigables con la comunidad sorda.
+- Falta de filtros por criterios relevantes: ubicación, accesibilidad, especialidad.
+- Carencia de plataformas inclusivas, visuales y navegables fácilmente por cualquier usuario.
 
----
+*¿Cómo My Sign Resuelve Esto?*
 
-## Solución Propuesta
-
-My Sign ofrece:
-- Un portal con información verificada de servicios accesibles (salud, educación, gobierno, etc.).
-- Directorio de intérpretes LSC con filtros por especialidad, zona y disponibilidad.
-- Sistema de emergencias visual, con mensajes automáticos que incluyen ubicación GPS y solicitud de intérprete.
-
----
-
-## Características Principales
-
-1. **Búsqueda de Servicios Accesibles**
-   - Filtrado por categoría, zona geográfica y características de accesibilidad.
-   - Resultados ordenados por proximidad y relevancia.
-   - Información clara sobre disponibilidad de intérprete LSC y horarios de atención.
-
-2. **Directorio de Intérpretes LSC**
-   - Filtros por especialidad, cobertura geográfica y disponibilidad horaria.
-   - Visualización de tarifas, experiencia y certificaciones.
-   - Contacto directo vía WhatsApp, teléfono o email.
-
-3. **Sistema de Emergencias**
-   - Botón de acceso rápido visible en toda la app.
-   - Emergencias predefinidas con iconografía universal.
-   - Mensajes automáticos con ubicación GPS y solicitud de intérprete, enviados por WhatsApp, SMS y correo.
-
-4. **Interfaz Accesible**
-   - Alto contraste, iconografía universal y navegación simplificada (máximo 3 clics).
-   - Compatible con tecnologías asistivas (lectores de pantalla).
+- Centralización de datos: todo en un solo sitio, validado y categorizado.
+- Filtros accesibles, visuales y de bajo esfuerzo cognitivo.
+- Directorio 100% enfocado en LSC, con contacto inmediato.
+- Interfaz de máximo 3 clics, con diseño validado por la comunidad y uso de gifs e imágenes claras.
+- *Todo usuario puede ejecutar la app con 2 comandos.*
 
 ---
 
-## Arquitectura del Proyecto
+## Arquitectura y Estructura de Carpetas
 
-```
-MySignProject/
-│
-├── backend/                    # API REST – FastAPI
-│   ├── app/
-│   │   ├── models/            # Modelos de datos (Pydantic)
-│   │   ├── routes/            # Endpoints y rutas de la API
-│   │   └── services/          # Lógica de negocio (HashMaps, Árbol de categorías)
-│   ├── data/                  # Datos mock y de prueba
-│   ├── tests/                 # Pruebas unitarias
-│   ├── main.py                # Entrada principal
-│   └── requirements.txt       # Dependencias Python
-│
-└── frontend/                  # Aplicación React
-    ├── src/
-    │   ├── components/        # Componentes reutilizables
-    │   ├── pages/             # Páginas principales del sitio
-    │   └── services/          # Conexión con la API
-    ├── package.json
-    └── vite.config.js
+### Frontend (React)
+```plaintext
+frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── gif/
+│   ├── components/
+│   │   ├── FooterDeLaPagina.jsx
+│   │   ├── ListadoInterpretes.jsx
+│   │   ├── ListadoEntidades.jsx
+│   │   ├── Nav.jsx
+│   │   └── Servicios.jsx
+│   ├── pages/
+│   │   ├── EntidadesPage.jsx
+│   │   ├── InicioPage.jsx
+│   │   └── InterpretesPage.jsx
+│   └── services/
+│       ├── EntidadesService.js
+│       └── InterpretesService.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── ...
+├── reports/
+│   ├── report.html
+│   ├── reporte_style.css
+│   └── test_report.html
+├── package.json
+└── vite.config.js
 ```
 
----
-
-## Tecnologías Utilizadas
-
-**Backend**
-- Python 3.8+
-- FastAPI (API REST, documentación automática)
-- Pydantic (modelado y validación de datos)
-- Uvicorn (servidor ASGI)
-- UnitTest / Pytest (testing)
-
-**Frontend**
-- React 19.1.1 (UI)
-- Vite 7.1.7 (build y dev server)
-- React Router DOM 7.9.3 (routing)
-- Lucide React (iconografía accesible)
-- ESLint (linting)
-
-**Estructuras de Datos**
-- HashMaps (búsqueda rápida O(1) para servicios e intérpretes)
-- Árbol jerárquico (organización de categorías y subcategorías)
-
----
-
-## Requisitos Previos
-
-Instala y verifica las siguientes herramientas:
-
-- Python 3.8+
-- Node.js 20.19.0+
-- npm (incluido con Node.js)
-- Docker (opcional, para despliegue)
-- Git
-
-Verifica versiones ejecutando:
-```bash
-python --version
-node --version
-npm --version
-docker --version
+### Backend (FastAPI & Python)
+```plaintext
+backend/
+├── app/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   │   ├── categoria_tree.py
+│   │   └── buscador.py
+│   ├── utils/
+│   └── main.py
+├── data/
+│   └── mock_data.py
+├── app/tests/
+│   ├── test_buscador.py
+│   ├── test_categoria.py
+│   ├── test_errors.py
+│   ├── test_pagination.py
+│   ├── test_schemas.py
+│   └── __init__.py
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── README_DOCKER.md *(Guía Docker)*
+└── pyproject.toml
 ```
 
 ---
 
-## Instalación y Configuración
+## Características Clave
 
-1. **Clonar el Repositorio**
-    ```bash
-    git clone https://github.com/mysignproyect/MySignProject.git
-    cd MySignProject
-    ```
-
-2. **Backend (FastAPI)**
-    ```bash
-    cd backend
-    python -m venv venv
-    # Activar entorno virtual
-    # Windows:
-    venv\Scripts\activate
-    # Linux/Mac:
-    source venv/bin/activate
-    pip install -r requirements.txt
-    ```
-
-3. **Frontend (React)**
-    ```bash
-    cd frontend
-    npm install
-    ```
-   
-4. **Tests**
-    ```bash
-    pip install pytest-html
-   general:    pytest
-   individual: 
-   pytest backend/tests --html=reports/backend_report.html --self-contained-html
-   pytest frontend/tests --html=reports/frontend_report.html --self-contained-html
-    ```
+- *Búsqueda multicriterio:* Categoría, zona, disponibilidad, accesibilidad.
+- *Directorio de intérpretes LSC certificado:* con contacto directo (WhatsApp, email, teléfono).
+- *Tarjetas visuales para entidades aliadas:* información directa y clara para salud, gobierno y educación.
+- *Filtros por especialidad, zona y tarifa de intérpretes.*
+- *Navegación accesible, visual y amigable.*
+- *Pruebas automatizadas con generación de reportes visuales HTML.*
+- *Despliegue inmediato con Docker para usuarios sin experiencia técnica.*
+- *API REST bien documentada (Swagger).*
+- *Manual de usuario detallado adaptado para todo nivel.*
 
 ---
 
-## Ejecución del Proyecto
+## Manual de Usuario (Guía Paso a Paso)
 
-**Backend**
-```bash
+### 1. Ingreso y navegación
+
+Al abrir la aplicación:
+  - Accedes por defecto a la pantalla principal, donde puedes elegir entre “Servicios” o “Directorio de intérpretes”.
+  - Los menús superiores te permiten siempre volver al inicio o a cualquier sección principal en máximo 3 clics.
+
+### 2. Buscar entidades y servicios
+
+- En la pestaña de “Servicios”, filtra por tipo (Salud, Educación, Gobierno), zona o criterios extra de accesibilidad.
+- Cada servicio se presenta como una tarjeta con:  
+  - Nombre, dirección, teléfonos
+  - Zona de cobertura
+  - Iconos e indicadores visuales de accesibilidad e intérprete LSC disponible
+
+### 3. Directorio de intérpretes
+
+- Puedes filtrar por especialidad, zona, disponibilidad y tarifas.
+- Haz clic en un perfil para ver detalles (certificaciones, años de experiencia, formas de contacto).
+- Contacta con un clic vía WhatsApp, llamada o correo electrónico.
+
+### 4. Pruebas y reportes
+
+- Ejecuta las pruebas desde el backend y revisa los reportes HTML generados automáticamente.
+- Ideal para profesores o nuevos desarrolladores que deseen comprobar calidad y confiabilidad del código.
+
+### 5. Ejecución rápida (ver sección ["Instalación y Ejecución Rápida"](#instalación-y-ejecución-rápida))
+
+- ¡Cualquier persona puede correr la app y visualizar todos los datos filtrando con clicks y visualizando información clara desde cualquier dispositivo!
+---
+
+## Documentación Técnica y Justificación Estructuras de Datos
+
+*¿Por qué esta arquitectura y estas estructuras?*
+
+- *Árbol jerárquico (Python):*  
+  - Modelo de categorías/subcategorías natural.
+  - Permite búsquedas recursivas eficientes.
+  - Facilita agregar nuevas categorías sin reescribir código.
+  - Justificación completa y ejemplos en /backend/app/services/categoria_tree.py.
+
+- *HashMap/Dicts (Python):*  
+  - Búsqueda O(1) por id, zona o especialidad.
+  - Implementado en /backend/app/services/buscador.py, cubriendo todos casos de búsqueda rápida.
+  - Justifica velocidad y escalabilidad para expansión futura.
+
+- *Recursión:*  
+  - Para traversar el árbol de categorías de forma limpia y legible.
+  - Ejemplo y explicación tanto en la [propuesta académica](./Propuesta proyecto de aula My Sign.docx) como en los comentarios de código y este README.
+
+- *Testing automático:*  
+  - Cubre árbol, filtros, búsquedas por texto/zona/categoría, paginación.
+  - Unitarias en /backend/app/tests/ cubren casos exitosos, bordes y fallos esperados.
+---
+
+## Integración y Uso de IA
+
+- *Diseño de estructuras de datos:* Prompts generados con IA para establecer el mejor árbol y diccionario posible, explicación clara en terminología docente y para usuarios, lista de ventajas, casos de uso, caso base y casos recursivos.
+- *Documentación y recursión:* Explicación integrada de cada algoritmo con analogía educativa.
+- *Pruebas e Informes:* Automatización de casos de prueba y generación de reportes HTML sugerido por IA.
+- *Experiencia de usuario:* Gifs e imágenes en frontend generados y sugeridos para hacer la app más amigable a cualquier persona (ver /frontend/src/assets/gif e /img).
+
+---
+
+## Instalación y Ejecución Rápida
+
+### 👉 [Guía Docker Completa](backend/README_DOCKER.md) (si quieres todo en un comando, sin instalar dependencias)
+
+### Requisitos mínimos
+
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Node.js 20+](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) (usualmente con Node.js)
+- [Git](https://git-scm.com/downloads)
+- (Opcional) [Docker](https://docs.docker.com/get-docker/)
+
+---
+### 1. Clona el repositorio
+
+```
+bash
+git clone https://github.com/mysignproyect/MySignProject.git
+cd MySignProject
+```
+
+---
+
+### 2. Backend: instalación y ejecución
+```
+bash
 cd backend
-source venv/bin/activate  # o venv\Scripts\activate en Windows
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python -m venv venv
 ```
-- Acceso: [http://localhost:8000](http://localhost:8000)
+# Activar entorno virtual:
 
-**Frontend**
-```bash
+# En Windows
+```
+venv\Scripts\activate
+```
+# En Mac/Linux
+```
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+#### Corre el backend:
+```
+bash
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+- Acceso API: [http://localhost:8000](http://localhost:8000)
+- Documentación interactiva (Swagger): [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+### 3. Frontend: instalación y ejecución
+```
+bash
 cd frontend
+npm install
 npm run dev
 ```
-- Acceso: [http://localhost:5173](http://localhost:5173)
+- Acceso frontend: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## Endpoints de la API
+### 4. (Opcional) Docker para ejecutar todo de manera automática
 
-- `GET /api/servicios` – Listado de servicios (filtros opcionales)
-- `GET /api/servicios/{servicio_id}` – Detalle de servicio
-- `GET /api/servicios/categoria/{categoria}` – Servicios por categoría
-- `GET /api/interpretes` – Listado de intérpretes (filtros opcionales)
-- `GET /api/interpretes/{interprete_id}` – Detalle de intérprete
-- `GET /api/categorias` – Todas las categorías
+Revisa la guía avanzada de Docker:  
+[backend/README_DOCKER.md](backend/README_DOCKER.md)
 
-**Documentación interactiva**: [Swagger UI](http://localhost:8000/docs)
-
----
-
-## Ejemplos de Modelos de Datos
-
-**Servicio**
-```json
-{
-  "id": "s1",
-  "nombre": "Hospital San Vicente Fundación",
-  "categoria": "Salud",
-  "subcategoria": "Hospital General",
-  "direccion": "Carrera 51D #62-29, Medellín",
-  "telefono": "+57 604 4441333",
-  "zona": "Norte",
-  "caracteristicas_accesibilidad": ["Rampas", "Ascensores"],
-  "tiene_interprete_lsc": true,
-  "distancia_aproximada": 2.5
-}
+Con Docker solo necesitas:
 ```
-
-**Intérprete**
-```json
-{
-  "id": "i1",
-  "nombre": "Laura Pérez Gómez",
-  "especialidades": ["Médica", "Legal"],
-  "zonas_cobertura": ["Centro", "Norte"],
-  "disponibilidad": "Lunes a Viernes 8:00 - 18:00",
-  "tarifa_hora": 60000.0,
-  "años_experiencia": 5,
-  "telefono": "+57 3104567890",
-  "whatsapp": "+57 3104567890",
-  "email": "laura.perez@example.com"
-}
+bash
+docker compose up --build
 ```
+y todo quedará corriendo automáticamente.
 
 ---
 
-## Pruebas
+### 5. Pruebas y reportes
 
-**Backend**
-```bash
+#### Backend
+```
+bash
 cd backend
-pytest tests/ -v
+Desde la raíz del proyecto se ejecuta el siguiente comando: pytest
 ```
+Revisa el archivo generado report.html para ver resultados completos de las pruebas.
 
-**Frontend**
-```bash
-cd frontend
-npm run test
-```
+---
+## Recursos de Apoyo y Enlaces
+
+- [Prototipo Interactivo Figma](https://www.figma.com/design/wksq1JPGmSkbUH64O9Uewp/Untitled?node-id=0-1&t=tTwV1PWaw9cesa4M-0)*
+- [Guía Docker](backend/README_DOCKER.md)
 
 ---
 
-## Casos de Uso
+## Equipo
 
-1. **Búsqueda de servicios accesibles**
-   - Ejemplo: Usuario busca hospitales en la zona Centro, con intérprete LSC disponible 24h.
-
-2. **Localización de intérpretes especializados**
-   - Ejemplo: Usuario filtra intérpretes médicos disponibles en su zona.
-
-3. **Sistema de emergencias**
-   - Ejemplo: Usuario reporta emergencia médica, el sistema envía un mensaje automático con ubicación y solicitud de intérprete.
-
----
-
-## Equipo de Desarrollo
-
-Proyecto académico para la asignatura Estructura de Datos y Lenguajes de Programación Orientada a Objetos.
-
-**Integrantes**
 - Celene Parra Vega
 - Juan Esteban Acevedo Patiño
 - Daniela Pérez Agualimpia
+- Comunidad sorda casa de la cultura la estrella
 
 ---
 
-## Alcance del MVP
-
-- 15-20 servicios accesibles verificados de Medellín
-- 5-8 intérpretes LSC certificados
-- 4 categorías principales y 10 subcategorías
-- Búsqueda O(1) con HashMaps
-- Árbol jerárquico de categorías
-- Interfaz accesible (máx. 3 clics por acción)
-
----
-
-## Licencia
+## Créditos, Licencia y Contribuciones
 
 Proyecto académico para la Universidad Salazar y Herrera.  
-**Uso exclusivo para fines educativos.**
-
-## Prototipo
-
-- [Prototipo UI proyecto](https://www.figma.com/design/wksq1JPGmSkbUH64O9Uewp/Untitled?node-id=0-1&t=tTwV1PWaw9cesa4M-0)
----
-
-## Contribuciones
-
-Proyecto cerrado.  
-Para consultas, sugerencias o comentarios, contactar al equipo de desarrollo.
+*Uso exclusivo para fines educativos.*  
+¿Dudas, sugerencias? Contacta al equipo o deja una issue en el repositorio.
 
 ---
 
-## Recursos Adicionales
-
-- [API Docs (Swagger)](http://localhost:8000/docs)
-- [Propuesta Original](docs/Propuesta_proyecto_de_aula_My_Sign.docx)
-
----
-
-## Comentarios Específicos
-
-- Todos los nombres de carpetas y archivos reflejan la estructura actual del proyecto.
-- Los ejemplos de modelos corresponden al formato real usado en la API y base de datos.
-- Los comandos están pensados para usuarios nuevos y avanzados.
-- Instrucciones de pruebas y despliegue separadas para backend y frontend.
-- Se destacan los filtros y funcionalidades clave del sistema, según los requerimientos del usuario y comunidad.
+> Este README fue cuidadosamente integrado para que toda persona, sin importar su background técnico, pueda entender, correr y justificar este software.
