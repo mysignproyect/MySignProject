@@ -133,7 +133,6 @@ span.xpassed,
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   margin: 10px 0;
 }
 .media-container img,
@@ -185,17 +184,3 @@ button:hover {
   right: 5px;
 }
 
-div.media,
-.logwrapper {
-  display: none !important;
-}
-
-#results-table td .logwrapper {
-  margin: 0;
-  padding: 0;
-}
-
-table#results-table th:last-child,
-table#results-table td:last-child {
-    display: none;
-}
