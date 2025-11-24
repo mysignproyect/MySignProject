@@ -1,8 +1,44 @@
+#sobreNosotros span {
+    position: relative;
+    display: inline-block; 
+}
+
+
+
 .gif-container {
     position: absolute;
     top: 100%;
     left: 0;
     z-index: 1000;
+    pointer-events: none;
+    animation: slideDown 0.3s ease-out;
+}
+
+#sobreNosotros .gif-container {
+   top: 40%;
+   left: 20%;
+}
+
+#titulo_servicios{
+    position: relative;
+    display: inline-block; 
+}
+
+.servicios{
+    top: 85%;
+    left: 10%;
+}
+.servicio_numero_uno{
+    display: flex;
+    flex-direction: column;
+}
+
+.interprete, .entidades{
+    position: relative;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    z-index: 0;
     pointer-events: none;
     animation: slideDown 0.3s ease-out;
 }
