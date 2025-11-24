@@ -184,15 +184,17 @@ Al abrir la aplicación:
 
 *Cobertura plena, claridad para cualquier usuario:*
 - Pruebas backend (Pytest + HTML):  
+```
   bash
   cd backend
   pytest app/tests/ --html=reports/backend_report.html --self-contained-html
-  
+  ```
 - Pruebas frontend:
+```
   bash
   cd frontend
   npm run test
-  
+  ```
 - Consulta reportes en /frontend/reports/ y /backend/reports/ para resultados visuales y detallados.
 
 ---
