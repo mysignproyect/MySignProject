@@ -1,3 +1,3 @@
-from .schemas import Servicio, Interprete
+from .schemas import Servicio
 
-__all__ = ["Servicio", "Interprete"]
+__all__ = ["Servicio"]

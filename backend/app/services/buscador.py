@@ -37,22 +37,27 @@ class BuscadorServicios:
     # ========================================================================
 
     def _indexar_servicios(self, servicios: List[dict]) -> None:
-        """Indexa servicios en HashMaps."""
         for servicio in servicios:
             sid = servicio.get("id")
             if sid is None:
                 continue
 
-            # ID
-            self._servicios_por_id[sid] = servicio
+            self._indexar_servicio_por_id(sid, servicio)
+            self._indexar_servicio_por_categoria(servicio)
+            self._indexar_servicio_por_zona(servicio)
 
-            # Categoría
-            categoria = servicio.get("categoria", "Sin Categoria")
-            self._servicios_por_categoria.setdefault(categoria, []).append(servicio)
+    
+    def _indexar_servicio_por_id(self, sid: str, servicio: dict) -> None:
+        self._servicios_por_id[sid] = servicio
 
-            # Zona
-            zona = servicio.get("zona", "Sin Zona")
-            self._servicios_por_zona.setdefault(zona, []).append(servicio)
+    def _indexar_servicio_por_categoria(self, servicio: dict) -> None:
+        categoria = servicio.get("categoria", "Sin Categoria")
+        self._servicios_por_categoria.setdefault(categoria, []).append(servicio)
+
+    def _indexar_servicio_por_zona(self, servicio: dict) -> None:
+        zona = servicio.get("zona", "Sin Zona")
+        self._servicios_por_zona.setdefault(zona, []).append(servicio)
+
 
     def _indexar_interpretes(self, interpretes: List[dict]) -> None:
         """Indexa intérpretes en HashMaps."""

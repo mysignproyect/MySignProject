@@ -40,6 +40,7 @@ main{
     width:  100%;
     justify-content: end;
     height: auto;
+    border-radius: 20px;
 }
 
 #titulo_servicios {

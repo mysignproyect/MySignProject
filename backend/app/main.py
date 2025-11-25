@@ -36,22 +36,19 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",  # React (Create React App)
-        "http://localhost:5173",  # Vite
-        "http://127.0.0.1:3000",  # Variante con IP local
-        "http://127.0.0.1:5173",  # Variante con IP local
+        "http://localhost:3000",   # React (CRA)
+        "http://localhost:5173",   # Vite default
+        "http://localhost:5174",   # Vite en otro puerto
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+        "https://mysign-frontend.onrender.com",# cuando despliegues el frontend en Render
+        "https://my-sign-project.vercel.app", #despliege de front en vercel
     ],
-    allow_credentials=True,  # Permitir cookies y credenciales
-    allow_methods=[
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE",
-        "OPTIONS",
-    ],  # Métodos HTTP permitidos
-    allow_headers=["*"],  # Permitir todos los headers
+    allow_credentials=True,
+    allow_methods=["*"],   # todos los métodos HTTP
+    allow_headers=["*"],   # todos los headers
 )
-
 
 # ============================================================================
 # MANEJADORES DE EXCEPCIONES PERSONALIZADAS
