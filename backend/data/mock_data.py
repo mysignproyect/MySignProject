@@ -431,7 +431,7 @@ INTERPRETES_MOCK = [
     {
         "id": "i7",
         "nombre": "Camila Zapata Henao",
-        "foto": "https://i.ytimg.com/vi/nEsINwQDQcc/maxresdefault.jpg",
+        "foto": None,
         "especialidades": ["Educativa", "Eventos"],
         "zonas_cobertura": ["Oriente", "Centro"],
         "disponibilidad": "Lunes a Viernes 7:00 - 15:00",
