@@ -1,5 +1,5 @@
 import "../assets/css/Servicios.css";
-import gif_Interpretes from "../assets/gif/interpretes.gif";
+import gif_Interpretes from "../assets/gif/Interpretes.gif";
 import gif_Entidades from "../assets/gif/Entidades.gif";
 import { Link } from "react-router-dom";
 import "../assets/css/Gif.css";
@@ -30,7 +30,7 @@ export default function Servicios() {
                 <h2>Contactarse con entidad</h2>
                 <p>Ubica hospitales y centros de salud accesibles en Medellín, con información de contacto directo y servicios inclusivos.</p>
                  <Link to="/entidades" id="info_servicio_button_link">
-                   <button id="info_servicio_button">Contactarse con entidad</button>
+                  <button id="info_servicio_button">Contactarse con entidad</button>
                  </Link>
             </div>
         </section>

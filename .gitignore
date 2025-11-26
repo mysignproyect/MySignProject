@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel / Render
+.vercel/
+.render/
+
+# Python (si usas FastAPI)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.env
+
+# OS
+.DS_Store
+Thumbs.db

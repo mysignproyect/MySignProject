@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import "../assets/css/InterpretesYServicios.css";
 import ListadoInterpretes from "../components/ListadoInterpretes";
 import Footer from "../components/FooterDeLaPagina";
-import gif_Interpretes from "../assets/gif/interpretes.gif";
+import gif_Interpretes from "../assets/gif/Interpretes.gif";
 
 
 export default function Interpretes() {

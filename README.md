@@ -294,6 +294,7 @@ Revisa el archivo generado report.html para ver resultados completos de las prue
 - Juan Esteban Acevedo Patiño
 - Daniela Pérez Agualimpia
 - Comunidad sorda casa de la cultura la estrella
+- Interprete: Jose David Acevedo Patiño (estudiante LSC comunidad sorda casa de la cultura la estrella)
 
 ---
 
