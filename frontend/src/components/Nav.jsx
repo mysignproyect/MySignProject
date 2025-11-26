@@ -23,29 +23,6 @@ export default function Nav() {
               </div>
             )}    
         </div>
-        <div id="buscador">
-            <div className="buscador_input">
-                <input 
-                    type="text" 
-                    placeholder="Búsqueda..." 
-                    value={search} 
-                    onChange={(e) => {
-                        setSearch(e.target.value);
-                    }}
-                    id="nav_input"
-                />
-                {search && (
-                    <button 
-                        onClick={() => {
-                            setSearch("");
-                        }} 
-                        className="nav_boton_cerrar"
-                    >
-                        ✕
-                    </button>
-                )}
-            </div>
-        </div>
     </nav>
   );
 }
