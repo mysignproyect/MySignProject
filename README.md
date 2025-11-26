@@ -11,12 +11,12 @@
     - [Frontend (React)](#frontend-react)
     - [Backend (FastAPI)](#backend-fastapi)
 4. [Características Clave](#características-clave)
+5. [Recursos de Apoyo y Enlaces](#recursos-de-apoyo-y-enlaces)
 5. [Manual de Usuario (Guía Paso a Paso)](#manual-de-usuario-guía-paso-a-paso)
 6. [Documentación Técnica y Justificación Estructuras de Datos](#documentación-técnica-y-justificación-estructuras-de-datos)
 7. [Pruebas Automatizadas y Reportes](#pruebas-automatizadas-y-reportes)
 8. [Integración y Uso de IA](#integración-y-uso-de-ia)
 9. [Instalación y Ejecución Rápida](#instalación-y-ejecución-rápida)
-10. [Recursos de Apoyo y Enlaces](#recursos-de-apoyo-y-enlaces)
 11. [Equipo](#equipo)
 12. [Créditos, Licencia y Contribuciones](#créditos-licencia-y-contribuciones)
 ---
@@ -121,7 +121,16 @@ backend/
 - *Manual de usuario detallado adaptado para todo nivel.*
 
 ---
+## Recursos de Apoyo y Enlaces
 
+- [Prototipo Interactivo Figma](https://www.figma.com/design/wksq1JPGmSkbUH64O9Uewp/Untitled?node-id=0-1&t=tTwV1PWaw9cesa4M-0)*
+- [Guía Docker](backend/README_DOCKER.md)
+
+El proyecto fue desplegado en
+
+- BackEnd en Render: https://mysignproject.onrender.com
+- FrontEnd en Vercel: https://my-sign-project.vercel.app 
+- --
 ## Manual de Usuario (Guía Paso a Paso)
 
 ### 1. Ingreso y navegación
@@ -265,19 +274,17 @@ y todo quedará corriendo automáticamente.
 
 ### 5. Pruebas y reportes
 
-#### Backend
+Para ejecutar los reportes debe tener la libreria pytest intalada ¿Cómo instalarla?
+```
+pip install pytest-html
+```
+continue con la ejecución
 ```
 bash
 cd backend
 Desde la raíz del proyecto se ejecuta el siguiente comando: pytest
 ```
 Revisa el archivo generado report.html para ver resultados completos de las pruebas.
-
----
-## Recursos de Apoyo y Enlaces
-
-- [Prototipo Interactivo Figma](https://www.figma.com/design/wksq1JPGmSkbUH64O9Uewp/Untitled?node-id=0-1&t=tTwV1PWaw9cesa4M-0)*
-- [Guía Docker](backend/README_DOCKER.md)
 
 ---
 
